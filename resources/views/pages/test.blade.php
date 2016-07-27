@@ -4,9 +4,12 @@
 
 @section('content')         
         <!--overview start-->
-        <div class="row">
+        <div class="row" style="padding-bottom:10px;">
           <div class="col-lg-12">
-              <h3 class="page-header"><i class="fa fa-laptop"></i> 測試頁面</h3>
+            <h1 class="page-header" style="color:black;">
+                <i class="fa fa-laptop" style="color:black;font-size:36px;"> 測試頁面
+                </i>
+            </h1>
           </div>
         </div>
        <div class="row">
