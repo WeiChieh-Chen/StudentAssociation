@@ -1,14 +1,18 @@
 @include('layouts.partials.header')
-<body>
+<body style="background-color: lightblue;">
     <div id="wrapper">
         <!-- container section start -->
-        <section id="container" class="">
+        <section id="container">
             @include('layouts.partials.nevbar')
-            @yield('title')
-            @yield('content')
+            <section id="main-content">
+                <section class="wrapper">        
+                    @yield('content')
+                    @include('layouts.partials.footer')
+                </section>
+            </section>
         </section>
         <!-- container section start -->
     </div>
-    @include('layouts.partials.footer')
+    
     </body>
 </html>

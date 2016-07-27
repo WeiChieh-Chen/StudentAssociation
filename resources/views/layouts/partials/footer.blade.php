@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer row" style="background-Color:black;">
     <div class="row">
         <center>
             <p class="copy">

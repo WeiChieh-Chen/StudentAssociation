@@ -14,3 +14,7 @@
 Route::get('/',['as' => 'home', function () {
     return view('pages.index');
 }]);
+
+Route::get('/test',['as' => 'page.test', function () {
+    return view('pages.test');
+}]);

@@ -44,7 +44,7 @@
                   </a>
               </li>
               <li>
-                  <a class="" href="#">
+                  <a class="" href="/test">
                       <i class="icon_genius"></i>
                       <span>測試</span>
                   </a>
