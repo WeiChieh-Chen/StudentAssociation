@@ -1,24 +1,3 @@
-@include('layouts.partials.header')
-<style>
-    body {
-        background-color: lightblue;
-    }
-</style>
-
-<body>
-    <div id="wrapper">
-        <!-- container section start -->
-        <section id="container">
-            @include('layouts.partials.nevbar')
-            <section id="main-content">
-                <section class="wrapper">
-                    <div style="min-height:750px;">
-                        @yield('content')
-                    </div>
-                </section>
-            </section>
-        </section>
-    </div>
     <!-- Modal -->
     <div class="modal fade" id="AddForm" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -53,8 +32,3 @@
             </div>
         </div>
     </div>
-    @include('layouts.partials.footer')
-    <!-- container section start -->
-</body>
-
-</html>

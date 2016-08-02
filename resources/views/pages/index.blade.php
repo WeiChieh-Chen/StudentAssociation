@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', '資工系學會-蜘人血統控制板')
+@section('title', '蜘人血統控制板')
 
 @section('content')
 <style type="text/css">
@@ -22,7 +22,9 @@
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="info-box">
-            <center class="centerTitle"><h1 class="h1Padding">歡迎來到<br>資工系學會 蜘人血統控制板</h1></center>
+            <h1 class="mytitle"><?=$mainTitle?></h1>
+            <p class="titleContent">歡迎來到</p>
+            <p class="titleContent">系學會　蜘人血統控制板</p>
         </div>
     </div>
   </div>
