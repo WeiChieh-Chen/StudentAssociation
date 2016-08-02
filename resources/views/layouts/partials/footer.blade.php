@@ -1,44 +1,43 @@
 <style>
-.footer{
-    background-Color:black;
-}
-.copy{
-    color:White;   
-}
+    .footer {
+        background-Color: black;
+    }
+    
+    .copy {
+        color: White;
+    }
 </style>
 <div class="footer row">
     <div class="row">
         <center>
             <p class="copy">
-            國立虎尾科技大學 M.A.S.E Lab © All rights reserved. <br>
-            地址：632 雲林縣虎尾鎮文化路64號 No.64, Wunhua Rd., Huwei Township, Yunlin County 632, Taiwan<br>
-            製作群:黃立豪、陳威傑、蒙偉倫、葉晴尹、楊全還
+                國立虎尾科技大學 M.A.S.E Lab © All rights reserved. <br> 地址：632 雲林縣虎尾鎮文化路64號 No.64, Wunhua Rd., Huwei Township, Yunlin
+                County 632, Taiwan<br> 製作群:黃立豪、陳威傑、蒙偉倫、葉晴尹、楊全還
             </p>
         </center>
-        </div>
     </div>
 </div>
-    <!-- javascripts -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-ui-1.10.4.min.js"></script>
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+</div>
+<!-- javascripts -->
+<script src="{{URL::asset('js/jquery.js')}}"></script>
+<script src="js/jquery-ui-1.10.4.min.js"></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
 
-    <!-- bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+<!-- bootstrap -->
+<script src="js/bootstrap.min.js"></script>
 
-    <!-- nice scroll -->
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+<!-- nice scroll -->
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 
-    <!-- custom select -->
-    <script src="js/jquery.customSelect.min.js" ></script>
-   
-    <!--custome script for all page-->
-    <script src="js/scripts.js"></script>
+<!-- custom select -->
+<script src="js/jquery.customSelect.min.js"></script>
 
-  <script>
+<!--custome script for all page-->
+<script src="js/scripts.js"></script>
 
+<script>
     //carousel
     $(document).ready(function() {
         $("#owl-slider").owlCarousel({
@@ -46,14 +45,10 @@
           slideSpeed : 300,
           paginationSpeed : 400,
           singleItem : true
-
         });
     });
-
     //custom select box
-
     $(function(){
         $('select.styled').customSelect();
     });
-
-    </script>
+</script>
