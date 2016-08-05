@@ -5,7 +5,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">新增</h4>
                 </div>
-                @section('AddForm') @show
+                @yield('AddForm')
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">編輯</h4>
                 </div>
-                @section('EditForm') @show
+                @yield('EditForm')
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">你確定要移除嗎？</h4>
                 </div>
-                @section('DelForm') @show
+                @yield('DelForm')
             </div>
         </div>
     </div>

@@ -13,11 +13,11 @@
                 <section class="wrapper">
                     <div style="min-height:750px;">
                         @yield('content')
-                        @include('layouts.partials.modalForm')
                     </div>
+                    @include('layouts.partials.modalForm')  
                 </section>
             </section>
-        @include('layouts.partials.footer')
+            @include('layouts.partials.footer')
         </section>
     </div>
     <!-- container section start -->

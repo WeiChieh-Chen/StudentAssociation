@@ -45,25 +45,25 @@
             </li>
             <li>
                 <a class="" href="{{route('vote')}}">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <i class="icon_like" aria-hidden="true"></i>
                     <span>投票區</span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('apply')}}">
-                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <i class="icon_documents_alt" aria-hidden="true"></i>
                     <span>活動報名</span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('manager')}}">
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <i class="icon_group" aria-hidden="true"></i>
                     <span>人員管理 </span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('log')}}">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class=" icon_pencil-edit" aria-hidden="true"></i>
                     <span>Log</span>
                 </a>
             </li>
