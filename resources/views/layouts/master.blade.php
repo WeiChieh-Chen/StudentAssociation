@@ -12,6 +12,7 @@
             <section id="main-content">
                 <section class="wrapper">
                     <div style="min-height:750px;">
+                        <h1 class="mytitle">@yield('pagename')</h1>
                         @yield('content')
                     </div>
                     @include('layouts.partials.modalForm')  

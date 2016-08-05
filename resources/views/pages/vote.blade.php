@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title','投票區')
+@section('pagename','投票區')
 @section('content')
 <button class="btn btn-success btn-lg" style="position: relative;left: 87%" data-toggle="modal" data-target="#AddForm">新增</button>
 <table class="tableStyle">

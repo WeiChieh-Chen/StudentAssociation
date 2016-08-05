@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title','日誌紀錄')
+@section('pagename','日誌紀錄')
 @section('content')
 <br><br>
 <table class="tableStyle">

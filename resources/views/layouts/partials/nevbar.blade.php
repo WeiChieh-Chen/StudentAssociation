@@ -38,7 +38,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
             <li class="active">
-                <a class="" href="{{route('home')}}">
+                <a class="">
                     <i class="icon_house_alt"></i>
                     <span>資工系學會</span>
                 </a>
