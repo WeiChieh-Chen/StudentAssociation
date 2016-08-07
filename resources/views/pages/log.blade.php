@@ -15,7 +15,11 @@
         <td><?=$item->logInAC?></td>
         <td><?=$item->logInTime?></td>
         <td><?=$item->IP?></td>
-        <td><?=$item->logOutTime?></td>
+        @if(empty($item->logOutTime))  {{-- or $item->logOutTime == NULL--}}
+            <td>登入中....</td>
+        @else
+            <td><?=$item->logOutTime?></td>
+        @endif
     </tr>
     @endforeach
 </table>

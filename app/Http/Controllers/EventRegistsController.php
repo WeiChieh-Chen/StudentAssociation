@@ -39,7 +39,7 @@ class EventRegistsController extends Controller
     public function store(Request $request)
     {
         EventRegist::create($request->except('_token'));
-        return redirect()->route('pages.apply');
+        return redirect()->route('apply');
     }
 
     /**
@@ -74,7 +74,7 @@ class EventRegistsController extends Controller
     public function update(Request $request, $id)
     {
         EventRegist::find($id)->update($request->except('_token'));
-        return redirect()->route('pages.apply');
+        return redirect()->route('apply');
     }
 
     /**
@@ -86,6 +86,6 @@ class EventRegistsController extends Controller
     public function destroy($id)
     {
         EventRegist::destroy($id);
-        return redirect()->route('pages.apply');
+        return redirect()->route('apply');
     }
 }

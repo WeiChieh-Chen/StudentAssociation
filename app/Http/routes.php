@@ -39,3 +39,5 @@ Route::patch('manager/{id?}',['as' => 'manager.update','uses' => 'MembersControl
 Route::delete('manager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']);
 
 Route::get('log',['as' => 'log', 'uses' => 'LogsController@index']);
+Route::post('log/in',['as' => 'log.in', 'uses' => 'LogsController@store']);
+Route::post('log/out',['as' => 'log.out', 'uses' => 'LogsController@update']);

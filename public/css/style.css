@@ -830,9 +830,14 @@ div[data-role="editor-toolbar"] {
 }
 
 .top-nav .username {
-    font-size: 13px;
+    font-size: 20px;
     color: #bdbdbd;
 }
+.top-nav ul.top-menu > li > a:hover .username{
+    color: 	#FFAA33;
+    /*color: #7498f1;*/
+}
+
 
 .top-nav ul.top-menu > li > a {
     padding: 8px;
@@ -857,8 +862,10 @@ div[data-role="editor-toolbar"] {
     border-top-color: #A4AABA;
 }
 .top-nav ul.top-menu > li > a:hover .caret {
-    border-bottom-color: #7498f1;
-    border-top-color: #7498f1;
+    border-bottom-color: #FFAA33;
+    border-top-color: #FFAA33;
+    /*border-bottom-color: #7498f1;
+    border-top-color: #7498f1;*/
 }
 
 .log-arrow-up {
