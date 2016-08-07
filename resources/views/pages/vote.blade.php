@@ -36,13 +36,13 @@
                 <div id="optionAddForm"></div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <i class="fa fa-plus-square-o fa-2x" role="button" onclick="insertItem()" aria-hidden="true"></i>
-                        <i class='fa fa-minus-square-o fa-2x' role='button' onclick="removeItem()" aria-hidden='true'></i>
+                        <i class="fa fa-plus-square-o fa-2x" style="cursor: pointer" role="button" onclick="insertItem()" aria-hidden="true"></i>
+                        <i class='fa fa-minus-square-o fa-2x' style="cursor: pointer" role="button" onclick="removeItem()" aria-hidden='true'></i>
                     </div>
                 </div>
         </div>
         <div class="modal-footer">
-            {!!Form::button('關閉',['class' => 'btn btn-default', 'onclick' => '$("#optionAddForm").empty();$("#AddItems").val("")' ,'data-dismiss' => 'modal'])!!}
+            {!!Form::button('關閉',['class' => 'btn btn-default', 'onclick' => '$("#optionAddForm").empty();$("#AddItems").val("");number=0' ,'data-dismiss' => 'modal'])!!}
             {!!Form::submit('儲存',['class' => 'btn btn-primary'])!!}
         </div>
     {!!Form::close()!!}
