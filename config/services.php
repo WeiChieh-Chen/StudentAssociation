@@ -39,4 +39,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => '726538731961-31rrunh6501eidsi5skplul6dfcbqfod.apps.googleusercontent.com',
+        'client_secret' => 'dbM7B0ejPJYDR_PUpP15DYV6',
+        'redirect' => 'https://project.app/auth/google/callback',
+    ],
+
 ];

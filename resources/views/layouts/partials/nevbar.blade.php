@@ -16,39 +16,16 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="username">
-                        @if(session()->has('account'))
                             <i class="fa fa-user" aria-hidden="true"></i> <?=session('account')?><i class="caret"></i>
-                        @else
-                            <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;登入
-                        @endif
                     </span>
                 </a>
-                @if(session()->has('account'))
                     <form id="logout" action="{{route('log.out')}}" class="dropdown-menu extended logout" method="post">
                         <div class="log-arrow-up"></div>
                         <li class="eborder-top">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <a href="#" onclick="document.getElementById('logout').submit()"><i class="icon_lock-open"> 登出</i></a>           
+                            <a href="#" onclick="document.getElementById('logout').submit();"><i class="icon_lock-open"> 登出</i></a>           
                         </li>
                     </form>
-                @else
-                    <div class="dropdown-menu extended login" style="color: black;">
-                        {!!Form::open(['class' => 'form' ,'role' => 'form','method' => 'post','route' => 'log.in'])!!}
-                        <center><h4>你是誰?</h4></center>
-                        <div class="form-group">
-                            {!!Form::text('logInAC',null,['class' =>'col-sm-8 form-control' ,'placeholder' => '校務帳號'])!!}
-                            <br><br>
-                            {!!Form::password('password',['class' =>'col-sm-8 form-control' ,'placeholder' => '校務密碼'])!!}
-                        </div>
-                        <br>
-                        <div class="form-horizontal-right">
-                            <div class="col-sm-9"></div>
-                            {!!Form::submit('登入',['class' => 'col-sm-3 btn btn-primary'])!!}
-                        </div>
-                        {!!Form::close()!!}
-                    </div>
-                @endif
-
             </li>
             <!-- user login dropdown end -->
         </ul>
