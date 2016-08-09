@@ -11,7 +11,7 @@
 |
 */
 Route::auth();
-Route::get('auth/google', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/google',['as' => 'auth', 'uses' => 'Auth\AuthController@redirectToProvider']);
 Route::get('auth/google/callback', 'Auth\AuthController@handleProviderCallback');
 
 Route::group(['middleware' =>'auth'],function(){
@@ -34,6 +34,7 @@ Route::group(['middleware' =>'auth'],function(){
         Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'EventRegistsController@destroy']);
 
     });
+    
     Route::group(['prefix' => 'manager'],function(){
         Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
         Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
@@ -41,6 +42,7 @@ Route::group(['middleware' =>'auth'],function(){
         Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']);
         
     });
+
     Route::group(['prefix' => 'log'],function(){
         Route::get('/',['as' => 'log', 'uses' => 'LogsController@index']);
         Route::post('/in',['as' => 'log.in', 'uses' => 'LogsController@store']);
