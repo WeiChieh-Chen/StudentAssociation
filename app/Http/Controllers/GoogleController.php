@@ -26,10 +26,18 @@ class GoogleController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('google')->user();
-
-        Auth::loginUsingId($user->getId());
-        return redirect()->route('home');
+        if($user = Socialite::driver('google')->user()){
+            if($find_user = User::select()->where('email','=',$user->email)->first()){
+                Auth::login($find_user);
+            }else {
+                $add_user = User::create([
+                    'email' => $user->email,
+                    'name' => $user->name
+                ]);
+                Auth::login($add_user);
+            }
+        }
+        return redirect()->route('home',['userinfo' => $user]);
         // $user->token;
     }
 }

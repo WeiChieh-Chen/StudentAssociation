@@ -11,8 +11,8 @@
 |
 */
 Route::auth();
-Route::get('auth/google',['as' => 'auth', 'uses' => 'Auth\AuthController@redirectToProvider']);
-Route::get('auth/google/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('auth/google',['as' => 'auth', 'uses' => 'GoogleController@redirectToProvider']);
+Route::get('auth/google/callback', 'GoogleController@handleProviderCallback');
 
 Route::group(['middleware' =>'auth'],function(){
 
@@ -35,7 +35,7 @@ Route::group(['middleware' =>'auth'],function(){
 
     });
     
-    Route::group(['prefix' => 'manager'],function(){
+    Route::group(['prefix' => 'manager'],function(){    
         Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
         Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
         Route::patch('/{id?}',['as' => 'manager.update','uses' => 'MembersController@update']);
