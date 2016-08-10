@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Log;
-use App\Http\Requests\AccountRequest;
+use Auth;
 use Carbon\Carbon;
+use App\Models\Log;
+use Illuminate\Http\Request;
+use App\Http\Requests\AccountRequest;
+
 class LogsController extends Controller
 {
     /**
@@ -38,13 +39,7 @@ class LogsController extends Controller
      */
     public function store(AccountRequest $request)
     {
-        $request['IP'] = $request->ip();
-        $request['logInTime'] = Carbon::now();
-        Log::create($request->except('_token'));
-
-        $request->session()->put('account', $request->logInAC);
-        return redirect()->route('log');
-        
+        //  Using GoogleController to store.
     }
 
     /**
@@ -78,12 +73,10 @@ class LogsController extends Controller
      */
     public function update(Request $request)
     {
-        if($request->session()->has('account')){
-            $request['logOutTime'] = Carbon::now();
-            Log::all()->last()->update($request->except('_token'));
-            $request->session()->flush();
-        }
-        return redirect()->route('log');
+        $request['logOutTime'] = Carbon::now();
+        Log::all()->last()->update($request->except('_token'));
+        Auth::logout();
+        return redirect()->route('home');
     }
 
     /**

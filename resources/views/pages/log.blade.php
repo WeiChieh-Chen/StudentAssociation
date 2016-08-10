@@ -7,7 +7,7 @@
     <tr>
         <td>登入帳號</td>
         <td>登入時間</td>
-        <td>登入IP</td>
+        <td>使用IP</td>
         <td>登出時間</td>
     </tr>
     @foreach($results as $item)
