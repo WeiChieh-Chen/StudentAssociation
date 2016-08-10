@@ -15,15 +15,17 @@
             <!-- user login dropdown start-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <span class="username">使用者資訊</span>
-                    <b class="caret"></b>
+                    <span class="username">
+                            <i class="fa fa-user" aria-hidden="true"></i> <?=Auth::user()->email?><i class="caret"></i>
+                    </span>
                 </a>
-                <ul class="dropdown-menu extended logout">
-                    <div class="log-arrow-up"></div>
-                    <li class="eborder-top">
-                        <a href="#"><i class="icon_profile"></i> 登出</a>
-                    </li>
-                </ul>
+                    <form id="logout" action="{{route('log.out')}}" class="dropdown-menu extended logout" method="post">
+                        <div class="log-arrow-up"></div>
+                        <li class="eborder-top">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <a href="#" onclick="document.getElementById('logout').submit();"><i class="icon_lock-open"> 登出</i></a>           
+                        </li>
+                    </form>
             </li>
             <!-- user login dropdown end -->
         </ul>
@@ -38,32 +40,32 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
             <li class="active">
-                <a class="" href="{{route('home')}}">
+                <a class="">
                     <i class="icon_house_alt"></i>
                     <span>資工系學會</span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('vote')}}">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <i class="icon_like" aria-hidden="true"></i>
                     <span>投票區</span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('apply')}}">
-                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <i class="icon_documents_alt" aria-hidden="true"></i>
                     <span>活動報名</span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('manager')}}">
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <i class="icon_group" aria-hidden="true"></i>
                     <span>人員管理 </span>
                 </a>
             </li>
             <li>
                 <a class="" href="{{route('log')}}">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class=" icon_pencil-edit" aria-hidden="true"></i>
                     <span>Log</span>
                 </a>
             </li>

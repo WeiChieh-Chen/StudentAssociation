@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use Auth;
+use Carbon\Carbon;
 use App\Models\Log;
-use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Http\Requests\AccountRequest;
 
 class LogsController extends Controller
 {
@@ -15,7 +16,7 @@ class LogsController extends Controller
      */
     public function index()
     {
-        $obtain =  Log::orderBy('id','DESC');
+        $obtain = Log::orderBy('id','DESC');
         //paginate()會將結果陣列，自動格式成他需要的樣子，而其不為JSON格式陣列，故無法成為物件陣列。get()則為一JSON格式之陣列，故可被JS的物件陣列使用。
         return view('pages.log',['mainTitle' => 'Log資訊','results' => $obtain->paginate(13),'obtainArr' => $obtain->get()]);
     }
@@ -36,9 +37,9 @@ class LogsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
-        Log::create($repuest->except('_token'));
+        //  Using GoogleController to store.
     }
 
     /**
@@ -70,9 +71,12 @@ class LogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request['logOutTime'] = Carbon::now();
+        Log::all()->last()->update($request->except('_token'));
+        Auth::logout();
+        return redirect()->route('home');
     }
 
     /**
@@ -83,7 +87,6 @@ class LogsController extends Controller
      */
     public function destroy($id)
     {
-        Log::find($id)->delete();
-        return redirect()->route('pages.log');
+        //
     }
 }

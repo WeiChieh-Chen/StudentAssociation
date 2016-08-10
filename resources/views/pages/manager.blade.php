@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title','人員管理')
+@section('pagename','人員管理')
 @section('content')
 <script language="javascript">
     var number = 0;

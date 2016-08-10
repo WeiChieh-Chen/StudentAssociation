@@ -37,7 +37,7 @@ class MembersController extends Controller
     public function store(Request $request)
     {
         Member::create($request->except('_token'));
-        return redirect()->route('pages.manager');
+        return redirect()->route('manager');
     }
 
     /**
@@ -72,7 +72,7 @@ class MembersController extends Controller
     public function update(Request $request, $id)
     {
         Member::find($id)->update($request->except('_token'));
-        return redirect()->route('pages.manager');
+        return redirect()->route('manager');
     }
 
     /**
@@ -84,6 +84,6 @@ class MembersController extends Controller
     public function destroy($id)
     {
         Member::destroy($id);
-        return redirect()->route('pages.manager');
+        return redirect()->route('manager');
     }
 }

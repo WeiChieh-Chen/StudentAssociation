@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title','活動報名')
+@section('pagename','活動報名')
 @section('content')
 <script language="javascript">
     var number = 0;

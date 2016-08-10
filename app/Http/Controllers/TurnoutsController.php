@@ -38,9 +38,7 @@ class TurnoutsController extends Controller
      */
     public function store(VotePostRequest $request)
     {
-        if($request->has('item')){
-            Turnout::create($request->except('_token')); 
-        }
+        Turnout::create($request->except('_token')); 
         echo "<script>name = 0;</script>";
         return redirect()->route('pages.vote');
     }
@@ -77,7 +75,7 @@ class TurnoutsController extends Controller
     public function update(Request $request, $id)
     {
         Turnout::find($id)->update($request->except('_token'));
-        return redirect()->route('pages.vote');
+        return redirect()->route('vote');
     }
 
     /**
@@ -89,6 +87,6 @@ class TurnoutsController extends Controller
     public function destroy($id)
     {
         Turnout::destroy($id);
-        return redirect()->route('pages.vote');
+        return redirect()->route('vote');
     }
 }
