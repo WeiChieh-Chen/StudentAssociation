@@ -16,7 +16,7 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="username">
-                            <i class="fa fa-user" aria-hidden="true"></i> <?=?><i class="caret"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i> <?=Auth::user()->email?><i class="caret"></i>
                     </span>
                 </a>
                     <form id="logout" action="{{route('log.out')}}" class="dropdown-menu extended logout" method="post">
