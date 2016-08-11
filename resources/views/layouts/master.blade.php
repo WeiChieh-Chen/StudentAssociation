@@ -18,17 +18,11 @@
                     @include('layouts.partials.modalForm')  
                 </section>
             </section>
-<<<<<<< HEAD
         @include('layouts.partials.footer')
         </section>
     </div>
-
-=======
-            @include('layouts.partials.footer')
-        </section>
-    </div>
     <!-- container section start -->
->>>>>>> release/v0.1.0
+
 </body>
 
 </html>
