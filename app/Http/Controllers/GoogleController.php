@@ -45,7 +45,7 @@ class GoogleController extends Controller
                     'errMes_footer' => "登入!"
                 ]);
             }
-                        // Storing user infomation to log
+            // Storing user infomation to log
             Log::create([
                 'logInAC' => Auth::user()->email,
                 'logInTime' => Carbon::now(),
@@ -55,4 +55,5 @@ class GoogleController extends Controller
             // $user->token;
         }
     }
+
 }

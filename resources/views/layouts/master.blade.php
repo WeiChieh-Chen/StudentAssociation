@@ -22,7 +22,6 @@
         </section>
     </div>
     <!-- container section start -->
-
 </body>
 
 </html>
