@@ -38,12 +38,7 @@ class GoogleController extends Controller
                 ]);
                 Auth::login($add_user);
             }else {
-                return redirect()->back()->with([
-                    'errTitle' => '信箱位置錯誤',
-                    'errMes_header' => "請使用",
-                    'errMes_content' => "虎尾科大信箱",
-                    'errMes_footer' => "登入!"
-                ]);
+                return redirect()->back()->with('errMail','您應該使用虎尾科大信箱登入');
             }
             // Storing user infomation to log
             Log::create([

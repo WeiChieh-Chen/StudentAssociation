@@ -59,15 +59,10 @@
                     </form>
 
                         
-                @if(session()->has('errTitle'))
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">{{session('errTitle')}}</div>
-                        <div class="panel-body">
-                            {{session('errMes_header')}}
-                            <strong style="color: red">{{session('errMes_content')}}</strong>
-                            {{session('errMes_footer')}}
-                        </div>
-                    </div>
+                @if(session()->has('errMail'))
+                    <script>
+                        confirm('{{session('errMail')}}');
+                    </script>
                 @endif
                 </div>
             </div>
