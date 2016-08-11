@@ -52,12 +52,23 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <a type="button" class="btn btn-primary" href="{{route('auth')}}">
                                     <i class="fa fa-btn fa-sign-in"></i> Login
-                                </a>
-
+                                </a>                         
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>
+
+                        
+                @if(session()->has('errTitle'))
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">{{session('errTitle')}}</div>
+                        <div class="panel-body">
+                            {{session('errMes_header')}}
+                            <strong style="color: red">{{session('errMes_content')}}</strong>
+                            {{session('errMes_footer')}}
+                        </div>
+                    </div>
+                @endif
                 </div>
             </div>
         </div>
