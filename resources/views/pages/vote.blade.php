@@ -2,6 +2,40 @@
 @section('title','投票區')
 @section('pagename','投票區')
 @section('content')
+<script language="javascript">
+var number = 0;
+var datus = new Object();
+var optionNumber = 10;
+datus = <?=$obtainArr?>;
+
+function getForm(arrIndex, trueId){
+    $('#EdItems').val($('#item_'+arrIndex).children().html());
+    $('#index').attr('action','{{route('vote.update')}}/'+trueId);
+    for(var i = 1 ; i <= optionNumber ; i++){
+        if(datus[arrIndex]['optionName'+i]){
+            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div></div>");
+        }else return;
+    }
+}
+
+function delIndex(trueID){
+    $('#delIndex').attr('action','{{route('vote.delete')}}/'+trueID);
+}
+
+function insertItem(){
+    if(number < 10){
+        number++;
+        $("#optionAddForm").append("<div class='form-group' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div></div>");
+    }
+}
+
+function removeItem(){
+    if(number > 0){
+        $("#item"+number).remove();
+        number--;
+    }
+}
+</script>
 <button class="btn btn-success btn-lg" style="position: relative;left: 87%" data-toggle="modal" data-target="#AddForm">新增</button>
 <table class="tableStyle">
     <tr>
@@ -74,38 +108,3 @@
         </div>
     {!!Form::close()!!}
 @endsection
-
-<script language="javascript">
-var number = 0;
-var datus = new Object();
-var optionNumber = 10;
-datus = <?=$obtainArr?>;
-
-function getForm(arrIndex, trueId){
-    $('#EdItems').val($('#item_'+arrIndex).children().html());
-    $('#index').attr('action','{{route('vote.update')}}/'+trueId);
-    for(var i = 1 ; i <= optionNumber ; i++){
-        if(datus[arrIndex]['optionName'+i]){
-            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div></div>");
-        }else return;
-    }
-}
-
-function delIndex(trueID){
-    $('#delIndex').attr('action','{{route('vote.delete')}}/'+trueID);
-}
-
-function insertItem(){
-    if(number < 10){
-        number++;
-        $("#optionAddForm").append("<div class='form-group' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div></div>");
-    }
-}
-
-function removeItem(){
-    if(number > 0){
-        $("#item"+number).remove();
-        number--;
-    }
-}
-</script>

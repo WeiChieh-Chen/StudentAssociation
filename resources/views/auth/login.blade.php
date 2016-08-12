@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <a type="button" class="btn btn-warning" href="{{route('google.auth')}}">
-                                    <i class="fa fa-btn fa-sign-in"></i> Google+
+                                    <i class="fa fa-btn fa-sign-in"></i> Google
                                 </a>                       
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
@@ -70,16 +70,25 @@
                         alertify.confirm('{{session('errMail')}}',function(ok){ 
                             if(ok){     
                                 alertify.success("即將回到Google登入頁面...");
-                                {{sleep(1)}}
-                                window.location.href = "https://accounts.google.com/ServiceLogin";
+                                {{sleep(1)}}                  
+                                window.location.href = "https://accounts.google.com/logout";
                             }else {
                                 alertify.error('已確認取消登入'); 
-                            }
+                            }   
                         });
                     </script>
                     @elseif(session()->has('logout'))
                     <script>
-                        alertify.log("{{session('logout')}}");
+                        alertify.set({
+                            'delay' : 1500,
+                            'labels': {
+                                ok        : "登出Google",
+                            }
+                        });
+                        alertify.log("{{session('logout')}}"); 
+                        alertify.alert('點選按鈕以登出帳號',function(){
+                            window.location.href = "https://accounts.google.com/logout";
+                        });
                         
                     </script>
                     @endif

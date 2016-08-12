@@ -40,7 +40,6 @@ class GoogleController extends Controller
             }else {
                 return redirect()->to('/login')->with('errMail','請重新以虎尾科大信箱登入，並再次拜訪本網站。');
             }
-            return redirect()->route('home');
             // Storing user infomation to log
             Log::create([
                 'logInAC' => Auth::user()->email,
@@ -48,6 +47,7 @@ class GoogleController extends Controller
                 'IP' => $_SERVER['REMOTE_ADDR']
             ]);
 
+            return redirect()->route('home');
             
             // $user->token;
         }
