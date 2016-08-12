@@ -25,9 +25,9 @@ function delIndex(trueID){
 function insertItem(){
     if(number < 10){
         number++;
-        $("#optionAddForm").append("<div class='form-group' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div></div>");
+        $("#optionAddForm").append("<div class='form-horizontal' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+number+"'></div></div>");
     }
-}
+}   
 
 function removeItem(){
     if(number > 0){
@@ -49,9 +49,9 @@ function removeItem(){
 
         <td>{{$item->item}}</td>
         <td>{{$item->votes}}</td>
-        <td>
+        <td style="font-size: 13px">
             @for($i = 1; !empty($item['fileName'.$i]) && $i<=10 ; $i++)
-                {{$item['fileName'.$i]}}
+                {{$item['fileName'.$i]}}<br>
             @endfor
         </td>
         <td>
