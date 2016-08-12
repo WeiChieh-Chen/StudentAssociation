@@ -1,9 +1,6 @@
 <style>
     .footer {
         background-Color: black;
-        margin-top: -9%;
-        width: 105%;
-        position: fixed;
     }
     
     .copy {

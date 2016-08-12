@@ -17,7 +17,7 @@ class TurnoutsController extends Controller
     {
         $obtain =  Turnout::orderBy('id','DESC');
         //paginate()會將結果陣列，自動格式成他需要的樣子，而其不為JSON格式陣列，故無法成為物件陣列。get()則為一JSON格式之陣列，故可被JS的物件陣列使用。
-        return view('pages.vote',['mainTitle' => '投票區','results' => $obtain->paginate(10) ,'obtainArr' => $obtain->get()]);
+        return view('pages.vote',['mainTitle' => '投票區','results' => $obtain->paginate(11) ,'obtainArr' => $obtain->get()]);
     }
 
     /**
@@ -40,7 +40,7 @@ class TurnoutsController extends Controller
     {
         Turnout::create($request->except('_token')); 
         echo "<script>name = 0;</script>";
-        return redirect()->route('pages.vote');
+        return redirect()->route('vote');
     }
 
     /**

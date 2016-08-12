@@ -17,8 +17,8 @@
                     </div>
                     @include('layouts.partials.modalForm')  
                 </section>
+            @include('layouts.partials.footer')
             </section>
-        @include('layouts.partials.footer')
         </section>
     </div>
     <!-- container section start -->

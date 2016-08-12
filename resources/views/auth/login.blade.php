@@ -80,7 +80,7 @@
                     @elseif(session()->has('logout'))
                     <script>
                         alertify.set({
-                            'delay' : 1500,
+                            'delay' : 2000,
                             'labels': {
                                 ok        : "登出Google",
                             }

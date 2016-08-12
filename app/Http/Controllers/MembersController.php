@@ -15,7 +15,8 @@ class MembersController extends Controller
      */
     public function index()
     {
-        return view('pages.manager',['mainTitle' => '人員管理','results' => Member::all()]);
+        $obtain = Member::orderBy('id','DESC');
+        return view('pages.manager',['mainTitle' => '人員管理','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);
     }
 
     /**

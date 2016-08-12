@@ -36,6 +36,7 @@
     </tr>
     @endforeach
 </table>
+<center><?=$results->render()?></center> 
 @endsection
 @section('AddForm')
     {!!Form::open([ 'class'=>'form-horizontal', 'method' => 'post', 'route' => 'manager.store'])!!}

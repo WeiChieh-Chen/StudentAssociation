@@ -34,7 +34,7 @@ function removeItem(){
         $("#item"+number).remove();
         number--;
     }
-}
+}   
 </script>
 <button class="btn btn-success btn-lg" style="position: relative;left: 87%" data-toggle="modal" data-target="#AddForm">新增</button>
 <table class="tableStyle">
@@ -46,9 +46,14 @@ function removeItem(){
     </tr>
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
-        <td><?=$item->item?></td>
-        <td><?=$item->votes?></td>
-        <td></td>  
+
+        <td>{{$item->item}}</td>
+        <td>{{$item->votes}}</td>
+        <td>
+            @for($i = 1; !empty($item['fileName'.$i]) && $i<=10 ; $i++)
+                {{$item['fileName'.$i]}}
+            @endfor
+        </td>
         <td>
             <button class="btn btn-danger bnt-lg" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</button>
             <button class="btn btn-info bnt-lg" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</button>
