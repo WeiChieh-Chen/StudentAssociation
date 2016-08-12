@@ -50,20 +50,39 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <a type="button" class="btn btn-primary" href="{{route('auth')}}">
-                                    <i class="fa fa-btn fa-sign-in"></i> Login
+                                <a type="button" class="btn btn-warning" href="{{route('google.auth')}}">
+                                    <i class="fa fa-btn fa-sign-in"></i> Google+
                                 </a>                       
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>
-
-                        
-                @if(session()->has('errMail'))
+                    @if(session()->has('errMail'))
                     <script>
-                        confirm('{{session('errMail')}}');
+                        alertify.set({
+                            'delay' : 3000,
+                            'labels': {
+                                ok        : "重新登入",
+                                cancel    : "取消"
+                            },
+                            'buttonFocus' : "ok"
+                        });  
+                        alertify.confirm('{{session('errMail')}}',function(ok){ 
+                            if(ok){     
+                                alertify.success("即將回到Google登入頁面...");
+                                {{sleep(1)}}
+                                window.location.href = "https://accounts.google.com/ServiceLogin";
+                            }else {
+                                alertify.error('已確認取消登入'); 
+                            }
+                        });
                     </script>
-                @endif
+                    @elseif(session()->has('logout'))
+                    <script>
+                        alertify.log("{{session('logout')}}");
+                        
+                    </script>
+                    @endif
                 </div>
             </div>
         </div>

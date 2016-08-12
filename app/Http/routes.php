@@ -11,8 +11,8 @@
 |
 */
 Route::auth();
-Route::get('auth/google',['as' => 'auth', 'uses' => 'GoogleController@redirectToProvider']);
-Route::get('auth/google/callback', 'GoogleController@handleProviderCallback');
+Route::get('auth/login',['as' => 'google.auth', 'uses' => 'GoogleController@redirectToGoogle']);
+Route::get('auth/callback', 'GoogleController@handleGoogleCallback');
 
 Route::group(['middleware' =>'auth'],function(){
 
@@ -45,8 +45,7 @@ Route::group(['middleware' =>'auth'],function(){
 
     Route::group(['prefix' => 'log'],function(){
         Route::get('/',['as' => 'log', 'uses' => 'LogsController@index']);
-        Route::post('/in',['as' => 'log.in', 'uses' => 'LogsController@store']);
-        Route::post('/out',['as' => 'log.out', 'uses' => 'LogsController@update']);
+        Route::post('logout',['as' => 'log.out', 'uses' => 'LogsController@update']);
         
     });
 
