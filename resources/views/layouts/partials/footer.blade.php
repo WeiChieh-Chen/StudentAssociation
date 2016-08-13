@@ -1,6 +1,7 @@
 <style>
     .footer {
         background-Color: black;
+        margin-bottom: 0; 
     }
     
     .copy {

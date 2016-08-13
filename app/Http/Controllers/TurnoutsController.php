@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Turnout;
 use App\Http\Requests\VotePostRequest;
+use Illuminate\Support\Facades\Input;
 
 class TurnoutsController extends Controller
 {
@@ -37,8 +38,16 @@ class TurnoutsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(VotePostRequest $request)
-    {
-        Turnout::create($request->except('_token')); 
+    {  
+        Turnout::create($request->except('_token'));
+        for ($i=1 ; $request->hasFile('fileName'.$i) ; $i++) {               //有沒有這個檔案
+            $file = $request->file('fileName'.$i);                          //取得檔案
+            $original_name = $file->getClientOriginalName();                //Laravel會儲存當案仍在暫存區時的名字，所以之後要把他更斤成正確檔名。                                                          
+            if($file->isValid()) {                                          //檔案是否有效 
+                $file->move('../Filebase', $original_name);  //移動檔案     
+                Turnout::all()->last()->update(['fileName'.$i => $original_name]); //更新
+            }
+        }
         echo "<script>name = 0;</script>";
         return redirect()->route('vote');
     }
@@ -88,5 +97,11 @@ class TurnoutsController extends Controller
     {
         Turnout::destroy($id);
         return redirect()->route('vote');
+    }
+
+
+    public function download($fileName)
+    {
+        return response()->download('../Filebase/'.$fileName);
     }
 }

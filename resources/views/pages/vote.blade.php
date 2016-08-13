@@ -31,7 +31,7 @@ function insertItem(){
 
 function removeItem(){
     if(number > 0){
-        $("#item"+number).remove();
+        $("#item"+number).remove(); 
         number--;
     }
 }   
@@ -49,12 +49,12 @@ function removeItem(){
 
         <td>{{$item->item}}</td>
         <td>{{$item->votes}}</td>
-        <td style="font-size: 13px">
+        <td style="font-size: 13px; width: 15%">
             @for($i = 1; !empty($item['fileName'.$i]) && $i<=10 ; $i++)
-                {{$item['fileName'.$i]}}<br>
+                <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a><br>
             @endfor
         </td>
-        <td>
+        <td style="width: 20%">
             <button class="btn btn-danger bnt-lg" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</button>
             <button class="btn btn-info bnt-lg" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</button>
         </td>
@@ -64,7 +64,7 @@ function removeItem(){
 <center><?=$results->render()?></center>
 @endsection
 @section('AddForm')
-    {!!Form::open(['class' => 'form-horizontal', 'role' => 'form' ,'method' => 'post' , 'route' => 'vote.store'])!!}
+    {!!Form::open(['class' => 'form-horizontal', 'role' => 'form' ,'method' => 'post' , 'route' => 'vote.store','files' => 'true'])!!}  {{--html is  enctype='multipart/form-data'--}}
         <div class="modal-body">
                 <div class="form-group">
                     {!!Form::label('AddItems','投票名稱',['class' => 'col-sm-2 control-label'])!!}
