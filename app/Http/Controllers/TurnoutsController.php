@@ -40,9 +40,8 @@ class TurnoutsController extends Controller
      */
     public function store(VotePostRequest $request)
     {  
-
         Turnout::create($request->except('_token'));
-        for ($i=1 ; $request->hasFile('fileName'.$i) ; $i++) {               //有沒有這個檔案
+        for ($i=1 ; $request->hasFile('fileName'.$i)  ; $i++) {               //有沒有這個檔案
             $file = $request->file('fileName'.$i);                          //取得檔案
             $original_name = $file->getClientOriginalName();                //Laravel會儲存當案仍在暫存區時的名字，所以之後要把他更斤成正確檔名。                                                          
             if($file->isValid()) {                                          //檔案是否有效 
@@ -84,7 +83,29 @@ class TurnoutsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Turnout::find($id)->update($request->except('_token'));
+        $item = Turnout::find($id);
+        $old_file_arr = Array();
+        $new_file_arr = Array();
+        //把要更新的檔案及舊檔名放入陣列。
+        foreach (range(1,10) as $key) {
+            if($request->hasFile('fileName'.$key)){
+                $old_file_arr   = array_add($old_file_arr , $key   , $item['fileName'.$key]);
+                $new_file_arr   = array_add($new_file_arr , $key   , $request->file('fileName'.$key)); //取新檔案
+            }
+        }
+
+        $item->update($request->except('_token'));                          //在這時，先把資料更新，因為目前有被更新的檔名應為暫存檔名。        
+
+        //刪除並更換檔案
+        foreach($new_file_arr as $key => $file){
+            $original_name = $file->getClientOriginalName();  
+            if($file->isValid()){                                                           //若新資料為有效資料
+                Storage::delete('Filebase/'.$old_file_arr[$key]);                           //再把舊檔刪除                 
+                $file->move(storage_path('app/Filebase/'),$original_name);                  //然後新檔移入
+                $item->update(['fileName'.$key => $original_name]);                         //將暫存檔名更換為真檔名
+            }
+        }
+
         return redirect()->route('vote');
     }
 

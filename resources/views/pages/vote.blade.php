@@ -13,7 +13,7 @@ function getForm(arrIndex, trueId){
     $('#index').attr('action','{{route('vote.update')}}/'+trueId);
     for(var i = 1 ; i <= optionNumber ; i++){
         if(datus[arrIndex]['optionName'+i]){
-            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div></div>");
+            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+i+"'></div></div>");
         }else return;
     }
 }
@@ -50,7 +50,7 @@ function removeItem(){
         <td>{{$item->item}}</td>
         <td>{{$item->votes}}</td>
         <td style="font-size: 13px; width: 15%">
-            @for($i = 1; !empty($item['fileName'.$i]) && $i<=10 ; $i++)
+            @for($i = 1; !empty($item['fileName'.$i]) ; $i++)
                 <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a><br>
             @endfor
         </td>
@@ -87,7 +87,7 @@ function removeItem(){
     {!!Form::close()!!}
 @endsection
 @section('EditForm')
-    {!!Form::open(['class' => 'form-horizontal','role' => 'form' ,'id' => 'index', 'method' => 'patch'])!!}
+    {!!Form::open(['class' => 'form-horizontal','role' => 'form' ,'id' => 'index', 'method' => 'patch' ,'files' => 'true'])!!}
     <div class="modal-body">
                 <div class="form-group">
                 {!!Form::label('EdItems','投票項目',['class' => 'col-sm-2 control-label'])!!}
