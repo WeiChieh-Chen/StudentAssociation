@@ -11,12 +11,12 @@ use Illuminate\Routing\Controller;
 
 class GoogleController extends Controller
 {   
-    /**
+    /** 
      * 重導使用者到 Google 認證頁。
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
@@ -26,27 +26,31 @@ class GoogleController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleGoogleCallback()
     {
         if($user = Socialite::driver('google')->user()){
             if($find_user = User::select()->where('email','=',$user->email)->first()){
                 Auth::login($find_user);
-            }else {
+            }else if(preg_match("/@gm.nfu.edu.tw/",$user->email)){
                 $add_user = User::create([
                     'name' => $user->name,
                     'email' => $user->email
                 ]);
                 Auth::login($add_user);
+            }else {
+                return redirect()->to('/login')->with('errMail','請重新以虎尾科大信箱登入，並再次拜訪本網站。');
             }
-        }
+            // Storing user infomation to log
+            Log::create([
+                'logInAC' => Auth::user()->email,
+                'logInTime' => Carbon::now(),
+                'IP' => $_SERVER['REMOTE_ADDR']
+            ]);
 
-        // Storing user infomation to log
-        Log::create([
-            'logInAC' => Auth::user()->email,
-            'logInTime' => Carbon::now(),
-            'IP' => $_SERVER['REMOTE_ADDR']
-        ]);
-        return redirect()->route('home');
-        // $user->token;
+            return redirect()->route('home');
+            
+            // $user->token;
+        }
     }
+
 }

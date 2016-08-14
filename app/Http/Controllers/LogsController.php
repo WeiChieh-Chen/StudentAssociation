@@ -76,7 +76,8 @@ class LogsController extends Controller
         $request['logOutTime'] = Carbon::now();
         Log::all()->last()->update($request->except('_token'));
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->to('/login')->with('logout','已登出本系統!');
+        ;
     }
 
     /**

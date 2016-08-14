@@ -3,23 +3,31 @@
     body {
         background-color: lightblue;
     }
+    .jumbotron {
+        background-color: lightblue;
+        text-align: center;
+        margin-top: 18%;
+    }
 </style>
 <body>
     <div id="wrapper">
         <!-- container section start -->
         <section id="container">
-        @include('layouts.partials.nevbar')
-            <section id="main-content">
+        @include('layouts.partials.lognevbar')
+
                 <section class="wrapper">
-                    <div style="min-height:750px;">
+                    <div style="min-height:700px;">
                         <h1 class="mytitle">@yield('pagename')</h1>
                         @yield('content')
-                    </div>
-                    @include('layouts.partials.modalForm')  
+                    {{-- </div>  --}}
                 </section>
+            @if (!Auth::guest())
             @include('layouts.partials.footer')
-            </section>
+            @endif
         </section>
+        @if (Auth::guest())
+        @include('layouts.partials.footer')
+        @endif
     </div>
     <!-- container section start -->
 </body>

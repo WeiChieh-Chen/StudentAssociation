@@ -17,7 +17,7 @@ class EventRegistsController extends Controller
     {
         $obtain = EventRegist::orderBy('id','DESC');
         //paginate()會將結果陣列，自動格式成他需要的樣子，而其不為JSON格式陣列，故無法成為物件陣列。get()則為一JSON格式之陣列，故可被JS的物件陣列使用。
-        return view('pages.apply',['mainTitle' => '活動報名','results' => $obtain->paginate(10),'obtainArr' => $obtain->get()]);
+        return view('pages.apply',['mainTitle' => '活動報名','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);
     }
 
     /**

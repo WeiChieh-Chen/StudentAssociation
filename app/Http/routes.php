@@ -11,8 +11,8 @@
 |
 */
 Route::auth();
-Route::get('auth/google',['as' => 'auth', 'uses' => 'GoogleController@redirectToProvider']);
-Route::get('auth/google/callback', 'GoogleController@handleProviderCallback');
+Route::get('auth/login',['as' => 'google.auth', 'uses' => 'GoogleController@redirectToGoogle']);
+Route::get('auth/callback', 'GoogleController@handleGoogleCallback');
 
 Route::group(['middleware' =>'auth'],function(){
 
@@ -25,6 +25,7 @@ Route::group(['middleware' =>'auth'],function(){
         Route::post('/store',['as' => 'vote.store','uses' => 'TurnoutsController@store']);
         Route::patch('/{id?}',['as' => 'vote.update','uses' => 'TurnoutsController@update']);
         Route::delete('/delete/{id?}',['as' => 'vote.delete','uses' => 'TurnoutsController@destroy']);
+        Route::get('/download/{filename?}',['as' => 'getFile','uses' => 'TurnoutsController@download']);
     });
 
     Route::group(['prefix' => 'apply'],function(){
@@ -32,22 +33,18 @@ Route::group(['middleware' =>'auth'],function(){
         Route::post('/store',['as' => 'apply.store','uses' => 'EventRegistsController@store']);
         Route::patch('/{id?}',['as' => 'apply.update','uses' => 'EventRegistsController@update']);
         Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'EventRegistsController@destroy']);
-
     });
     
     Route::group(['prefix' => 'manager'],function(){    
         Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
         Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
         Route::patch('/{id?}',['as' => 'manager.update','uses' => 'MembersController@update']);
-        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']);
-        
+        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']); 
     });
 
     Route::group(['prefix' => 'log'],function(){
         Route::get('/',['as' => 'log', 'uses' => 'LogsController@index']);
-        Route::post('/in',['as' => 'log.in', 'uses' => 'LogsController@store']);
-        Route::post('/out',['as' => 'log.out', 'uses' => 'LogsController@update']);
-        
+        Route::post('logout',['as' => 'log.out', 'uses' => 'LogsController@update']);
     });
 
 });

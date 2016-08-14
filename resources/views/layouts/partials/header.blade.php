@@ -25,6 +25,13 @@
     <link href="css/xcharts.min.css" rel=" stylesheet"/> 
     <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
     <link href="{{URL::asset('css/customStyle.css')}}" rel="stylesheet"/>
+    
+    <link rel="stylesheet"type="text/css" href="css/plugins/css3-hover-button-animation/btn1.css" />
+    
+    
+    <!--Alertify.css-->
+    <link rel="stylesheet" href="css/plugins/alertify.core.css" />
+    <link rel="stylesheet" href="css/plugins/alertify.default.css" />
 
     <!-- 最新編譯和最佳化的 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
@@ -40,5 +47,8 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
-    
+    <!--Alertify.js-->
+    <script type="text/javascript" src="/js/plugins/alertfy-0.3.11/alertify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"
+        crossorigin="anonymous"></script>
   </head>

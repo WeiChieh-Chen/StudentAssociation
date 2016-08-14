@@ -16,13 +16,13 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="username">
-                            <i class="fa fa-user" aria-hidden="true"></i> <?=Auth::user()->email?><i class="caret"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i> {{substr(Auth::user()->email,0,8)}}<i class="caret"></i>
                     </span>
                 </a>
                     <form id="logout" action="{{route('log.out')}}" class="dropdown-menu extended logout" method="post">
                         <div class="log-arrow-up"></div>
                         <li class="eborder-top">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            {{csrf_field()}}
                             <a href="#" onclick="document.getElementById('logout').submit();"><i class="icon_lock-open"> 登出</i></a>           
                         </li>
                     </form>

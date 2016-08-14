@@ -2,20 +2,61 @@
 @section('title','投票區')
 @section('pagename','投票區')
 @section('content')
+<script language="javascript">
+var number = 0;
+var datus = new Object();
+var optionNumber = 10;
+datus = <?=$obtainArr?>;
+
+function getForm(arrIndex, trueId){
+    $('#EdItems').val($('#item_'+arrIndex).children().html());
+    $('#index').attr('action','{{route('vote.update')}}/'+trueId);
+    for(var i = 1 ; i <= optionNumber ; i++){
+        if(datus[arrIndex]['optionName'+i]){
+            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+i+"'></div></div>");
+        }else return;
+    }
+}
+
+function delIndex(trueID){
+    $('#delIndex').attr('action','{{route('vote.delete')}}/'+trueID);
+}
+
+function insertItem(){
+    if(number < 10){
+        number++;
+        $("#optionAddForm").append("<div class='form-horizontal' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+number+"'></div></div>");
+    }
+}   
+
+function removeItem(){
+    if(number > 0){
+        $("#item"+number).remove(); 
+        number--;
+    }
+}   
+</script>
 <button class="btn btn-success btn-lg" style="position: relative;left: 87%" data-toggle="modal" data-target="#AddForm">新增</button>
 <table class="tableStyle">
     <tr>
     <td>投票項目</td>
     <td>投票人次</td>
-    <td>附件名稱</td>    
+    <td style="text-align: left">附件名稱</td>    
     <td></td>
     </tr>
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
-        <td><?=$item->item?></td>
-        <td><?=$item->votes?></td>
-        <td></td>  
-        <td>
+
+        <td>{{$item->item}}</td>
+        <td>{{$item->votes}}</td>
+        <td style="font-size: 13px; width: 15%; text-align: left">          
+            @for($i = 1; $i <= 10 ; $i++)
+                @if(!empty($item['fileName'.$i]))
+                    <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a> <項目{{$i}}><br>                
+                @endif
+            @endfor       
+        </td>
+        <td style="width: 20%">
             <button class="btn btn-danger bnt-lg" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</button>
             <button class="btn btn-info bnt-lg" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</button>
         </td>
@@ -25,7 +66,7 @@
 <center><?=$results->render()?></center>
 @endsection
 @section('AddForm')
-    {!!Form::open(['class' => 'form-horizontal', 'role' => 'form' ,'method' => 'post' , 'route' => 'vote.store'])!!}
+    {!!Form::open(['class' => 'form-horizontal', 'role' => 'form' ,'method' => 'post' , 'route' => 'vote.store','files' => 'true'])!!}  {{--html is  enctype='multipart/form-data'--}}
         <div class="modal-body">
                 <div class="form-group">
                     {!!Form::label('AddItems','投票名稱',['class' => 'col-sm-2 control-label'])!!}
@@ -48,7 +89,7 @@
     {!!Form::close()!!}
 @endsection
 @section('EditForm')
-    {!!Form::open(['class' => 'form-horizontal','role' => 'form' ,'id' => 'index', 'method' => 'patch'])!!}
+    {!!Form::open(['class' => 'form-horizontal','role' => 'form' ,'id' => 'index', 'method' => 'patch' ,'files' => 'true'])!!}
     <div class="modal-body">
                 <div class="form-group">
                 {!!Form::label('EdItems','投票項目',['class' => 'col-sm-2 control-label'])!!}
@@ -74,38 +115,3 @@
         </div>
     {!!Form::close()!!}
 @endsection
-
-<script language="javascript">
-var number = 0;
-var datus = new Object();
-var optionNumber = 10;
-datus = <?=$obtainArr?>;
-
-function getForm(arrIndex, trueId){
-    $('#EdItems').val($('#item_'+arrIndex).children().html());
-    $('#index').attr('action','{{route('vote.update')}}/'+trueId);
-    for(var i = 1 ; i <= optionNumber ; i++){
-        if(datus[arrIndex]['optionName'+i]){
-            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div></div>");
-        }else return;
-    }
-}
-
-function delIndex(trueID){
-    $('#delIndex').attr('action','{{route('vote.delete')}}/'+trueID);
-}
-
-function insertItem(){
-    if(number < 10){
-        number++;
-        $("#optionAddForm").append("<div class='form-group' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div></div>");
-    }
-}
-
-function removeItem(){
-    if(number > 0){
-        $("#item"+number).remove();
-        number--;
-    }
-}
-</script>
