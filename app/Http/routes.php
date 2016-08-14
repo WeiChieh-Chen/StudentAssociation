@@ -33,21 +33,18 @@ Route::group(['middleware' =>'auth'],function(){
         Route::post('/store',['as' => 'apply.store','uses' => 'EventRegistsController@store']);
         Route::patch('/{id?}',['as' => 'apply.update','uses' => 'EventRegistsController@update']);
         Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'EventRegistsController@destroy']);
-
     });
     
     Route::group(['prefix' => 'manager'],function(){    
         Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
         Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
         Route::patch('/{id?}',['as' => 'manager.update','uses' => 'MembersController@update']);
-        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']);
-        
+        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']); 
     });
 
     Route::group(['prefix' => 'log'],function(){
         Route::get('/',['as' => 'log', 'uses' => 'LogsController@index']);
         Route::post('logout',['as' => 'log.out', 'uses' => 'LogsController@update']);
-        
     });
 
 });
