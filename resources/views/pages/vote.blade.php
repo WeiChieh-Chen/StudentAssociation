@@ -41,7 +41,7 @@ function removeItem(){
     <tr>
     <td>投票項目</td>
     <td>投票人次</td>
-    <td>附件名稱</td>    
+    <td style="text-align: left">附件名稱</td>    
     <td></td>
     </tr>
     @foreach($results as $key => $item)
@@ -49,12 +49,12 @@ function removeItem(){
 
         <td>{{$item->item}}</td>
         <td>{{$item->votes}}</td>
-        <td style="font-size: 13px; width: 15%">
+        <td style="font-size: 13px; width: 15%; text-align: left">          
             @for($i = 1; $i <= 10 ; $i++)
                 @if(!empty($item['fileName'.$i]))
                     <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a><br>                
                 @endif
-            @endfor
+            @endfor       
         </td>
         <td style="width: 20%">
             <button class="btn btn-danger bnt-lg" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</button>
