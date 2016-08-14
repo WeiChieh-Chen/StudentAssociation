@@ -52,7 +52,7 @@ function removeItem(){
         <td style="font-size: 13px; width: 15%; text-align: left">          
             @for($i = 1; $i <= 10 ; $i++)
                 @if(!empty($item['fileName'.$i]))
-                    <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a><br>                
+                    <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a> <項目{{$i}}><br>                
                 @endif
             @endfor       
         </td>
