@@ -8,6 +8,7 @@
         color: White;
     }
 </style>
+
 <div class="footer row">
     <div class="row">
         <center>
