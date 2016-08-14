@@ -103,7 +103,7 @@ class TurnoutsController extends Controller
         foreach($new_file_arr as $key => $file){
             $original_name = $file->getClientOriginalName();  
             if($file->isValid()){                                                           //若新資料為有效資料
-                if(Storage::disk('local')->has('/Filebase/'.$old_file_arr[$key]))           //舊檔案是否存在
+                if(isset($old_file_arr[$key]))           //舊檔案是否存在
                     Storage::delete('Filebase/'.$old_file_arr[$key]);                       //再把舊檔刪除                 
                 $file->move(storage_path('app/Filebase/'),$original_name);                  //然後新檔移入
                 $item->update(['fileName'.$key => $original_name]);                         //將暫存檔名更換為真檔名
