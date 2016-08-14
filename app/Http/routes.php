@@ -25,6 +25,7 @@ Route::group(['middleware' =>'auth'],function(){
         Route::post('/store',['as' => 'vote.store','uses' => 'TurnoutsController@store']);
         Route::patch('/{id?}',['as' => 'vote.update','uses' => 'TurnoutsController@update']);
         Route::delete('/delete/{id?}',['as' => 'vote.delete','uses' => 'TurnoutsController@destroy']);
+        Route::get('/download/{filename?}',['as' => 'getFile','uses' => 'TurnoutsController@download']);
     });
 
     Route::group(['prefix' => 'apply'],function(){

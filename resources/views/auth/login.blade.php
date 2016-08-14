@@ -60,7 +60,7 @@
                     @if(session()->has('errMail'))
                     <script>
                         alertify.set({
-                            'delay' : 3000,
+                            'delay' : 2000,
                             'labels': {
                                 ok        : "重新登入",
                                 cancel    : "取消"
@@ -70,7 +70,6 @@
                         alertify.confirm('{{session('errMail')}}',function(ok){ 
                             if(ok){     
                                 alertify.success("即將回到Google登入頁面...");
-                                {{sleep(1)}}                  
                                 window.location.href = "https://accounts.google.com/logout";
                             }else {
                                 alertify.error('已確認取消登入'); 

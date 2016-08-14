@@ -1,12 +1,14 @@
 <style>
     .footer {
         background-Color: black;
+        margin-bottom: 0; 
     }
     
     .copy {
         color: White;
     }
 </style>
+
 <div class="footer row">
     <div class="row">
         <center>
