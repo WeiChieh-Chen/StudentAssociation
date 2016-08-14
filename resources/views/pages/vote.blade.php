@@ -50,8 +50,10 @@ function removeItem(){
         <td>{{$item->item}}</td>
         <td>{{$item->votes}}</td>
         <td style="font-size: 13px; width: 15%">
-            @for($i = 1; !empty($item['fileName'.$i]) ; $i++)
-                <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a><br>
+            @for($i = 1; $i <= 10 ; $i++)
+                @if(!empty($item['fileName'.$i]))
+                    <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a><br>                
+                @endif
             @endfor
         </td>
         <td style="width: 20%">

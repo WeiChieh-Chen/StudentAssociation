@@ -41,12 +41,14 @@ class TurnoutsController extends Controller
     public function store(VotePostRequest $request)
     {  
         Turnout::create($request->except('_token'));
-        for ($i=1 ; $request->hasFile('fileName'.$i)  ; $i++) {               //有沒有這個檔案
-            $file = $request->file('fileName'.$i);                          //取得檔案
-            $original_name = $file->getClientOriginalName();                //Laravel會儲存當案仍在暫存區時的名字，所以之後要把他更斤成正確檔名。                                                          
-            if($file->isValid()) {                                          //檔案是否有效 
-                $file->move(storage_path('app/Filebase/'), $original_name);  //移動檔案     
-                Turnout::all()->last()->update(['fileName'.$i => $original_name]); //更新
+        foreach(range(1,10) as $i) {
+            if ($request->hasFile('fileName'.$i)) {                                     //有沒有這個檔案
+                $file = $request->file('fileName'.$i);                                  //取得檔案
+                $original_name = $file->getClientOriginalName();                        //Laravel會儲存當案仍在暫存區時的名字，所以之後要把他更斤成正確檔名。                                                          
+                if($file->isValid()) {                                                  //檔案是否有效 
+                    $file->move(storage_path('app/Filebase/'), $original_name);         //移動檔案     
+                    Turnout::all()->last()->update(['fileName'.$i => $original_name]);  //更新
+                }
             }
         }
         return redirect()->route('vote');
