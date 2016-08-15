@@ -62,7 +62,7 @@ class TurnoutsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pages.static',['get' => Turnout::find($id)->get()]);
     }
 
     /**
@@ -96,9 +96,7 @@ class TurnoutsController extends Controller
                 $new_file_arr   = array_add($new_file_arr , $key   , $request->file('fileName'.$key)); //取新檔案
             }
         }
-
         $item->update($request->except('_token'));                          //在這時，先把資料更新，因為目前有被更新的檔名應為暫存檔名。        
-
         //刪除並更換檔案
         foreach($new_file_arr as $key => $file){
             $original_name = $file->getClientOriginalName();  
@@ -109,7 +107,6 @@ class TurnoutsController extends Controller
                 $item->update(['fileName'.$key => $original_name]);                         //將暫存檔名更換為真檔名
             }
         }
-
         return redirect()->route('vote');
     }
 
