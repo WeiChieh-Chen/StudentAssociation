@@ -39,24 +39,24 @@ function removeItem(){
 <a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
 <table class="tableStyle">
     <tr>
-    <td>投票項目</td>
-    <td>投票人次</td>
-    <td style="text-align: left">附件名稱</td>    
-    <td></td>
+    <td class="col-sm-4">投票主題</td>
+    <td class="col-sm-4">總投票人次</td>
+    <td class="col-sm-2" style="text-align: left">附件名稱</td>    
+    <td class="col-sm-2"></td>
     </tr>
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
 
-        <td>{{$item->item}}</td>
-        <td>{{$item->votes}}</td>
-        <td style="font-size: 13px; width: 15%; text-align: left">          
+        <td class="col-sm-4">{{$item->item}}</td>
+        <td class="col-sm-4">{{$item->votes}}</td>
+        <td class="col-sm-2" style="font-size: 13px; text-align: left">          
             @for($i = 1; $i <= 10 ; $i++)
                 @if(!empty($item['fileName'.$i]))
                     <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a> <項目{{$i}}><br>                
                 @endif
             @endfor       
         </td>
-        <td style="width: 20%">
+        <td class="col-sm-2">
             <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
             <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
         </td>
