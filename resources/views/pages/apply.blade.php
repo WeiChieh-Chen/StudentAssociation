@@ -42,7 +42,7 @@
         <td>{{$item->name}}</td>
         <td>
             {{substr($item->intro,0,15).'......'}}
-            <textarea style="display: none">{{$item->intro}}</textarea>
+            <text style="display: none">{{$item->intro}}</text>
         </td>
         <td>{{$item->start_at}}</td>
         <td>{{$item->end_at}}</td>
