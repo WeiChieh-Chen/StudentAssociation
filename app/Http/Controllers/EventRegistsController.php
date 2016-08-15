@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EventRegist;
-use App\Http\Requests;
+use App\Http\Requests\ApplyPostRequest;
 
 class EventRegistsController extends Controller
 {
@@ -36,7 +36,7 @@ class EventRegistsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApplyPostRequest $request)
     {
         EventRegist::create($request->except('_token'));
         return redirect()->route('apply');
@@ -71,7 +71,7 @@ class EventRegistsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApplyPostRequest $request, $id)
     {
         EventRegist::find($id)->update($request->except('_token'));
         return redirect()->route('apply');

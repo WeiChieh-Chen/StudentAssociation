@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Member;
-use App\Http\Requests;
+use App\Http\Requests\MemberPostRequest;
 
 class MembersController extends Controller
 {
@@ -35,7 +35,7 @@ class MembersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemberPostRequest $request)
     {
         Member::create($request->except('_token'));
         return redirect()->route('manager');
@@ -70,7 +70,7 @@ class MembersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemberPostRequest $request, $id)
     {
         Member::find($id)->update($request->except('_token'));
         return redirect()->route('manager');
