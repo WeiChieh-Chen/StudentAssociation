@@ -73,7 +73,7 @@ class LogsController extends Controller
      */
     public function update(Request $request)
     {
-        $request['logOutTime'] = Carbon::now();
+        $request['logOutTime'] = Carbon::now()->setTimezone('Asia/Taipei');
         Log::all()->last()->update($request->except('_token'));
         Auth::logout();
         return redirect()->to('/login')->with('logout','已登出本系統!');
