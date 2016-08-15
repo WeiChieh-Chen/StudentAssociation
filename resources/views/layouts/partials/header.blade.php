@@ -26,7 +26,10 @@
     <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
     <link href="{{URL::asset('css/customStyle.css')}}" rel="stylesheet"/>
     
+    <!--Button-->
     <link rel="stylesheet"type="text/css" href="css/plugins/css3-hover-button-animation/btn1.css" />
+    <link rel="stylesheet"type="text/css" href="css/plugins/css3-hover-button-animation/normalize.css" />
+    <link rel="stylesheet"type="text/css" href="css/plugins/css3-hover-button-animation/style.css" />
     
     
     <!--Alertify.css-->

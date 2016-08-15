@@ -1,10 +1,10 @@
 @include('layouts.partials.header')
 <style>
     body {
-        background-color: lightblue;
+        background-color: #cff09e;
     }
     .jumbotron {
-        background-color: lightblue;
+        background-color: #cff09e;
         text-align: center;
         margin-top: 18%;
     }
