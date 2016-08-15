@@ -13,7 +13,7 @@ class ApplyPostRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class ApplyPostRequest extends Request
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date'
         ];
     }
 }

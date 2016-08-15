@@ -13,7 +13,7 @@ class MemberPostRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,6 +24,7 @@ class MemberPostRequest extends Request
     public function rules()
     {
         return [
+            'account' => 'required|string',
             'studentID' => 'required|size:8',
             'phone' => 'required|size:10'
         ];
