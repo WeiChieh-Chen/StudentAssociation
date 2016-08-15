@@ -1,7 +1,7 @@
 @include('layouts.partials.header')
 <style>
     body {
-        background-color: lightblue;
+        background-color: #cff09e;
     }
 </style>
 <body>
