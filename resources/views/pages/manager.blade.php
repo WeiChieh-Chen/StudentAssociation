@@ -15,7 +15,7 @@
         $('#delIndex').attr('action','{{route('manager.delete')}}/'+trueID);
     }
 </script>
-<button class="btn btn-success btn-lg" style="position: relative;left: 87%" data-toggle="modal" data-target="#AddForm">新增</button>
+<a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
 
 <table class="tableStyle">
     <tr>
@@ -30,8 +30,8 @@
         <td><?=$item->phone?></td>
         <td><?=$item->studentID?></td>
         <td>
-            <button class="btn btn-danger bnt-lg" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</button>
-            <button class="btn btn-info bnt-lg" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</button>
+             <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
+            <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
         </td>
     </tr>
     @endforeach

@@ -11,6 +11,10 @@ use Illuminate\Routing\Controller;
 
 class GoogleController extends Controller
 {   
+    public function __construct(){
+        Carbon::now()->setTimezone('Asia/Taipei');
+    }
+
     /** 
      * 重導使用者到 Google 認證頁。
      *
@@ -43,7 +47,7 @@ class GoogleController extends Controller
             // Storing user infomation to log
             Log::create([
                 'logInAC' => Auth::user()->email,
-                'logInTime' => Carbon::now(),
+                'logInTime' => Carbon::now()->setTimezone('Asia/Taipei'),
                 'IP' => $_SERVER['REMOTE_ADDR']
             ]);
 
