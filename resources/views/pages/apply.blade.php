@@ -3,7 +3,7 @@
 @section('pagename','活動報名')
 @section('content')
 <style>
-    .tableContent > td {
+    .tableStyle > td {
         width: 20%;
     }
     textarea {
@@ -18,7 +18,7 @@
     function getForm(arrIndex,trueID){
         var wrapItem = $('#item_'+arrIndex);
         $('#EditName').val(wrapItem.children().html());
-        $('#EditIntro').val(wrapItem.children().next().children().html());
+        $('#EditIntro').val(wrapItem.children().next().html());
         $('#EditStart').val(wrapItem.children().next().next().html());
         $('#EditEnd').val(wrapItem.children().next().next().next().html());
         $('#index').attr('action','{{route('apply.update')}}/'+trueID);
@@ -40,10 +40,7 @@
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
         <td>{{$item->name}}</td>
-        <td>
-            {{substr($item->intro,0,15).'......'}}
-            <text style="display: none">{{$item->intro}}</text>
-        </td>
+        <td>{{str_limit($item->intro,15)}}</td>
         <td>{{$item->start_at}}</td>
         <td>{{$item->end_at}}</td>
         <td>

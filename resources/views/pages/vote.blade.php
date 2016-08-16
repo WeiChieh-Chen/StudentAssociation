@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @section('title','投票區')
 @section('pagename','投票區')
+@section('turnoutItem')
+    @foreach($obtainArr as $items)
+        <li><a href="#">{{str_limit($items->item,10)}}</a></li>
+    @endforeach        
+@endsection
 @section('content')
 <script language="javascript">
 var number = 0;
@@ -47,16 +52,16 @@ function removeItem(){
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
 
-        <td class="col-sm-4">{{$item->item}}</td>
-        <td class="col-sm-4">{{$item->votes}}</td>
-        <td class="col-sm-2" style="font-size: 13px; text-align: left">          
+        <td >{{$item->item}}</td>
+        <td >{{$item->votes}}</td>
+        <td style="font-size: 13px; text-align: left">          
             @for($i = 1; $i <= 10 ; $i++)
                 @if(!empty($item['fileName'.$i]))
                     <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a> <項目{{$i}}><br>                
                 @endif
             @endfor       
         </td>
-        <td class="col-sm-2">
+        <td>
             <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
             <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
         </td>
