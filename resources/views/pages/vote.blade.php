@@ -1,11 +1,6 @@
 @extends('layouts.master')
 @section('title','投票區')
 @section('pagename','投票區')
-@section('turnoutItem')
-    @foreach($obtainArr as $items)
-        <li><a href="#">{{str_limit($items->item,10)}}</a></li>
-    @endforeach        
-@endsection
 @section('content')
 <script language="javascript">
 var number = 0;

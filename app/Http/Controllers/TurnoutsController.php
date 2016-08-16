@@ -62,7 +62,7 @@ class TurnoutsController extends Controller
      */
     public function show($id)
     {
-        return view('pages.static',['get' => Turnout::find($id)->get()]);
+        return view('pages.static',['get' => Turnout::find($id)]);
     }
 
     /**

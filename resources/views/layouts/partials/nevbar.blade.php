@@ -54,7 +54,14 @@
                 </a>
                 <ul class="sub" style="text-align: left">
                         <a href="{{route('vote')}}">總項目</a>
-                        @yield('turnoutItem')
+                        <?php
+                            $obtainArr = DB::select('select * from `turnouts`');    
+                            foreach($obtainArr as $items){
+                        ?>
+                            <li><a href="{{route('vote.static').'/'.$items->id}}">{{str_limit($items->item,10)}}</a></li>
+                        <?php
+                            }
+                        ?>
                 </ul>
             </li> 
             <li>
