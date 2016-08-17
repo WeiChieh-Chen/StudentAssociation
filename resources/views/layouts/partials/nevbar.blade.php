@@ -55,7 +55,7 @@
                 <ul class="sub" style="text-align: left">
                         <a href="{{route('vote')}}">總項目</a>
                         <?php
-                            $obtainArr = DB::select('select * from `turnouts`');    
+                            $obtainArr = DB::table('turnouts')->orderBy('id','DESC')->get();    
                             foreach($obtainArr as $items){
                         ?>
                             <li><a href="{{route('vote.static').'/'.$items->id}}">{{str_limit($items->item,10)}}</a></li>

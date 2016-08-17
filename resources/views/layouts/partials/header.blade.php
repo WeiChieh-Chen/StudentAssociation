@@ -52,6 +52,9 @@
     <![endif]-->
     <!--Alertify.js-->
     <script type="text/javascript" src="{{URL::asset('/js/plugins/alertfy-0.3.11/alertify.min.js')}}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"
         crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{{URL::asset('chart/chart.js/dist/Chart.js')}}"></script>
   </head>
