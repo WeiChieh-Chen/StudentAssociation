@@ -2,6 +2,17 @@
 @section('title','活動報名')
 @section('pagename','活動報名')
 @section('content')
+<style>
+    .tableStyle > td {
+        width: 20%;
+    }
+    textarea {
+        border: #cff09e 6px double;
+        border-radius: 9px;
+        background:transparent;
+        resize: none;
+    }
+</style>
 <script language="javascript">
     var number = 0;
     function getForm(arrIndex,trueID){
@@ -29,7 +40,7 @@
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
         <td>{{$item->name}}</td>
-        <td>{{$item->intro}}</td>
+        <td>{{str_limit($item->intro,15)}}</td>
         <td>{{$item->start_at}}</td>
         <td>{{$item->end_at}}</td>
         <td>

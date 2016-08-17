@@ -21,21 +21,21 @@
 </div>
 </div>
 <!-- javascripts -->
-<script src="js/jquery-ui-1.10.4.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="{{URL::asset('js/jquery-ui-1.10.4.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
 
 <!-- bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 
 <!-- nice scroll -->
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{URL::asset('js/jquery.scrollTo.min.js')}}"></script>
+<script src="{{URL::asset('js/jquery.nicescroll.js')}}" type="text/javascript"></script>
 
 <!-- custom select -->
-<script src="js/jquery.customSelect.min.js"></script>
+<script src="{{URL::asset('js/jquery.customSelect.min.js')}}"></script>
 
 <!--custome script for all page-->
-<script src="js/scripts.js"></script>
+<script src="{{URL::asset('js/scripts.js')}}"></script>
 
 <script>
     //carousel

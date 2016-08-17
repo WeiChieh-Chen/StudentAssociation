@@ -45,12 +45,25 @@
                     <span>資工系學會</span>
                 </a>
             </li>
-            <li>
-                <a class="" href="{{route('vote')}}">
+            {{-- dropMenu --}} 
+            <li class="sub-menu">
+                <a class="" href="#" >
                     <i class="icon_like" aria-hidden="true"></i>
                     <span>投票區</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
-            </li>
+                <ul class="sub" style="text-align: left">
+                        <a href="{{route('vote')}}">總項目</a>
+                        <?php
+                            $obtainArr = DB::table('turnouts')->orderBy('id','DESC')->get();    
+                            foreach($obtainArr as $items){
+                        ?>
+                            <li><a href="{{route('vote.static').'/'.$items->id}}">{{str_limit($items->item,10)}}</a></li>
+                        <?php
+                            }
+                        ?>
+                </ul>
+            </li> 
             <li>
                 <a class="" href="{{route('apply')}}">
                     <i class="icon_documents_alt" aria-hidden="true"></i>
@@ -69,17 +82,6 @@
                     <span>Log</span>
                 </a>
             </li>
-            {{-- dropMenu --}} {{--
-            <li class="sub-menu">
-                <a href="javascript:;" class="">
-                    <i class="icon_table"></i>
-                    <span>測試</span>
-                    <span class="menu-arrow arrow_carrot-right"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="#">測試</a></li>
-                </ul>
-            </li> --}}
         </ul>
         <!-- sidebar menu end-->
     </div>
