@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSuperUserInUsersTable extends Migration
+class AddSuperUserInMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddSuperUserInUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->char('super_user',1)->after('password');
+        Schema::table('members', function (Blueprint $table) {
+            $table->char('super_user',1)->after('studentID');
         });
     }
 
@@ -24,7 +24,7 @@ class AddSuperUserInUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('members', function (Blueprint $table) {
             $table->dropColumn('super_user');
         });
     }

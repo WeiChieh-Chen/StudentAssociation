@@ -29,10 +29,10 @@ Route::group(['middleware' =>'auth'],function(){
     });
 
     Route::group(['prefix' => 'apply'],function(){
-        Route::get('/',['as' => 'apply',  'uses' => 'EventRegistsController@index']);
-        Route::post('/store',['as' => 'apply.store','uses' => 'EventRegistsController@store']);
-        Route::patch('/{id?}',['as' => 'apply.update','uses' => 'EventRegistsController@update']);
-        Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'EventRegistsController@destroy']);
+        Route::get('/',['as' => 'apply',  'uses' => 'ApplysController@index']);
+        Route::post('/store',['as' => 'apply.store','uses' => 'ApplysController@store']);
+        Route::patch('/{id?}',['as' => 'apply.update','uses' => 'ApplysController@update']);
+        Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'ApplysController@destroy']);
     });
     
     Route::group(['prefix' => 'manager'],function(){    
