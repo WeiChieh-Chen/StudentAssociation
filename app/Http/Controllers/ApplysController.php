@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EventRegist;
+use App\Models\Apply;
 use App\Http\Requests\ApplyPostRequest;
 
-class EventRegistsController extends Controller
+class ApplysController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class EventRegistsController extends Controller
      */
     public function index()
     {
-        $obtain = EventRegist::orderBy('id','DESC');
+        $obtain = Apply::orderBy('id','DESC');
         //paginate()會將結果陣列，自動格式成他需要的樣子，而其不為JSON格式陣列，故無法成為物件陣列。get()則為一JSON格式之陣列，故可被JS的物件陣列使用。
         return view('pages.apply',['mainTitle' => '活動報名','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);
     }
@@ -38,7 +38,7 @@ class EventRegistsController extends Controller
      */
     public function store(ApplyPostRequest $request)
     {
-        EventRegist::create($request->except('_token'));
+        Apply::create($request->except('_token'));
         return redirect()->route('apply');
     }
 
@@ -73,7 +73,7 @@ class EventRegistsController extends Controller
      */
     public function update(ApplyPostRequest $request, $id)
     {
-        EventRegist::find($id)->update($request->except('_token'));
+        Apply::find($id)->update($request->except('_token'));
         return redirect()->route('apply');
     }
 
@@ -85,7 +85,7 @@ class EventRegistsController extends Controller
      */
     public function destroy($id)
     {
-        EventRegist::destroy($id);
+        Apply::destroy($id);
         return redirect()->route('apply');
     }
 }
