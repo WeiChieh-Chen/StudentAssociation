@@ -37,10 +37,10 @@ Route::group(['middleware' =>'auth'],function(){
     });
     
     Route::group(['prefix' => 'manager'],function(){    
-        Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
-        Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
-        Route::patch('/{id?}',['as' => 'manager.update','uses' => 'MembersController@update']);
-        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']); 
+        Route::get('/',['as' => 'manager', 'uses' => 'UsersController@index']);
+        Route::post('/store',['as' => 'manager.store','uses' => 'UsersController@store']);
+        Route::patch('/{id?}',['as' => 'manager.update','uses' => 'UsersController@update']);
+        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'UsersController@destroy']); 
     });
 
     Route::group(['prefix' => 'log'],function(){

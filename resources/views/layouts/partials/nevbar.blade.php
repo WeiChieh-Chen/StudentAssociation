@@ -87,3 +87,10 @@
     </div>
 </aside>
 <!--sidebar end-->
+
+{{-- 關閉頁面時，留下登出紀錄 --}}
+<script>
+    window.onbeforeunload = function(){
+        documnet.getElementById('logout').submit();
+    }
+</script>

@@ -34,6 +34,7 @@ class GoogleController extends Controller
     {
         if($user = Socialite::driver('google')->user()){
             if($find_user = User::select()->where('email','=',$user->email)->first()){
+                if(empty($find_user->name)) $find_user->update(['name' => $find_user->name]);
                 Auth::login($find_user);
             }else if(preg_match("/@gm.nfu.edu.tw/",$user->email)){
                 $add_user = User::create([
