@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Gate;
 use Illuminate\Http\Request;
 use App\Models\Turnout;
 use App\Http\Requests\VotePostRequest;
@@ -16,7 +18,10 @@ class TurnoutsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+        if(Gate::denies('show', Auth::user())){
+            return redirect()->route('home');
+        }
         $obtain =  Turnout::orderBy('id','DESC');
         //paginate()會將結果陣列，自動格式成他需要的樣子，而其不為JSON格式陣列，故無法成為物件陣列。get()則為一JSON格式之陣列，故可被JS的物件陣列使用。
         return view('pages.vote',['mainTitle' => '投票區','results' => $obtain->paginate(11) ,'obtainArr' => $obtain->get()]);
@@ -40,6 +45,9 @@ class TurnoutsController extends Controller
      */
     public function store(VotePostRequest $request)
     {  
+        if(Gate::denies('show', Auth::user())){
+            return redirect()->route('home');
+        }
         Turnout::create($request->except('_token'));
         foreach(range(1,10) as $i) {
             if ($request->hasFile('fileName'.$i)) {                                     //有沒有這個檔案
@@ -62,6 +70,9 @@ class TurnoutsController extends Controller
      */
     public function show($id)
     {
+        if(Gate::denies('show', Auth::user())){
+            return redirect()->route('home');
+        }
         return view('pages.static',['get' => Turnout::find($id)]);
     }
 
@@ -85,6 +96,9 @@ class TurnoutsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Gate::denies('show', Auth::user())){
+            return redirect()->route('home');
+        }
         $item = Turnout::find($id);
         $old_file_arr = Array();
         $new_file_arr = Array();
@@ -118,6 +132,9 @@ class TurnoutsController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('show', Auth::user())){
+            return redirect()->route('home');
+        }
         // Turnout::destroy($id);
 
         $item = Turnout::find($id);
@@ -132,6 +149,9 @@ class TurnoutsController extends Controller
 
     public function download($fileName)
     {
+        if(Gate::denies('show', Auth::user())){
+            return redirect()->route('home');
+        }
         return response()->download(storage_path('app/Filebase/').$fileName);
     }
 }

@@ -23,7 +23,7 @@ Route::group(['middleware' =>'auth'],function(){
     Route::group(['prefix'=>'vote'],function(){
         Route::get('/',['as' => 'vote', 'uses' => 'TurnoutsController@index']);
         Route::get('/static/{id?}',['as' => 'vote.static', 'uses' => 'TurnoutsController@show']);
-        Route::post('/store',['as' => 'vote.store','uses' => 'Turn  outsController@store']);
+        Route::post('/store',['as' => 'vote.store','uses' => 'TurnoutsController@store']);
         Route::patch('/{id?}',['as' => 'vote.update','uses' => 'TurnoutsController@update']);
         Route::delete('/delete/{id?}',['as' => 'vote.delete','uses' => 'TurnoutsController@destroy']);
         Route::get('/download/{filename?}',['as' => 'getFile','uses' => 'TurnoutsController@download']);
@@ -37,10 +37,10 @@ Route::group(['middleware' =>'auth'],function(){
     });
     
     Route::group(['prefix' => 'manager'],function(){    
-        Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
-        Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
-        Route::patch('/{id?}',['as' => 'manager.update','uses' => 'MembersController@update']);
-        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']); 
+        Route::get('/',['as' => 'manager', 'uses' => 'UsersController@index']);
+        Route::post('/store',['as' => 'manager.store','uses' => 'UsersController@store']);
+        Route::patch('/{id?}',['as' => 'manager.update','uses' => 'UsersController@update']);
+        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'UsersController@destroy']); 
     });
 
     Route::group(['prefix' => 'log'],function(){

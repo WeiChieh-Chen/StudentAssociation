@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Gate;
 use Illuminate\Http\Request;
-use App\Models\Member;
-use App\Http\Requests\MemberPostRequest;
+use App\User;
+use App\Http\Requests\UserPostRequest;
 
-class MembersController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,11 @@ class MembersController extends Controller
      */
     public function index()
     {
-        $obtain = Member::orderBy('id','DESC');
-        return view('pages.manager',['mainTitle' => '人員管理','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+            $obtain = User::orderBy('id','DESC');
+            return view('pages.manager',['mainTitle' => '人員管理','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);        
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -35,10 +40,17 @@ class MembersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MemberPostRequest $request)
+    public function store(UserPostRequest $request)
     {
-        Member::create($request->except('_token'));
-        return redirect()->route('manager');
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+            if($findUser = User::select()->where('email',$request['account'])->first()){
+                User::update($reuqest->except('_token'));
+            }else {
+                User::create($request->except('_token'));
+            }
+            return redirect()->route('manager');
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -70,10 +82,14 @@ class MembersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MemberPostRequest $request, $id)
+    public function update(UserPostRequest $request, $id)
     {
-        Member::find($id)->update($request->except('_token'));
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+
+        User::find($id)->update($request->except('_token'));
         return redirect()->route('manager');
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -84,7 +100,11 @@ class MembersController extends Controller
      */
     public function destroy($id)
     {
-        Member::destroy($id);
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+
+        User::destroy($id);
         return redirect()->route('manager');
+        }
+        return redirect()->route('home');
     }
 }

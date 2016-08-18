@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class MemberPostRequest extends Request
+class UserPostRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class MemberPostRequest extends Request
     public function rules()
     {
         return [
-            'account' => 'required|string',
-            'studentID' => 'required|size:8',
-            'phone' => 'required|size:10'
+            'email' => 'required|email'
         ];
     }
 }
