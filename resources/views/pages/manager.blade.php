@@ -8,7 +8,7 @@
         var item = $('#item_'+arrIndex);
         $('#EditName').val(item.children().html());
         $('#EditPhone').val(item.children().next().html());
-        $('#EditRight').val((item.children().next().next().html().match('管理者')) ? 'Y':'N');
+        $('#EditRight').val((item.children().next().next().html().match('管理者')) ? 'manager':'member');
         $('#index').attr('action','{{route('manager.update')}}/'+trueID);
     }
 
@@ -37,7 +37,7 @@
         </td>
         <td>{{$item->phone}}</td>
         <td>
-            @if(str_contains($item->super_user, 'Y'))
+            @if(str_contains($item->super_user, 'manager'))
                 管理者
             @else
                 成員
@@ -72,7 +72,7 @@
                 <div class="form-group">
                     {!!Form::label('MemberRight','權限',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::select('super_user',['N' => '成員' , 'Y' => '管理者'], 'N', ['id' => 'MemberRight'])!!}
+                        {!!Form::select('super_user',['member' => '成員' , 'manager' => '管理者'], 'member', ['id' => 'MemberRight'])!!}
                     </div>
                 </div>           
         </div>

@@ -23,7 +23,7 @@ Route::group(['middleware' =>'auth'],function(){
     Route::group(['prefix'=>'vote'],function(){
         Route::get('/',['as' => 'vote', 'uses' => 'TurnoutsController@index']);
         Route::get('/static/{id?}',['as' => 'vote.static', 'uses' => 'TurnoutsController@show']);
-        Route::post('/store',['as' => 'vote.store','uses' => 'Turn  outsController@store']);
+        Route::post('/store',['as' => 'vote.store','uses' => 'TurnoutsController@store']);
         Route::patch('/{id?}',['as' => 'vote.update','uses' => 'TurnoutsController@update']);
         Route::delete('/delete/{id?}',['as' => 'vote.delete','uses' => 'TurnoutsController@destroy']);
         Route::get('/download/{filename?}',['as' => 'getFile','uses' => 'TurnoutsController@download']);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Gate;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\UserPostRequest;
@@ -15,8 +17,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $obtain = User::orderBy('id','DESC');
-        return view('pages.manager',['mainTitle' => '人員管理','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+            $obtain = User::orderBy('id','DESC');
+            return view('pages.manager',['mainTitle' => '人員管理','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);        
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -37,12 +42,15 @@ class UsersController extends Controller
      */
     public function store(UserPostRequest $request)
     {
-        if($findUser = User::select()->where('email',$request['account'])->first()){
-            User::update($reuqest->except('_token'));
-        }else {
-            User::create($request->except('_token'));
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+            if($findUser = User::select()->where('email',$request['account'])->first()){
+                User::update($reuqest->except('_token'));
+            }else {
+                User::create($request->except('_token'));
+            }
+            return redirect()->route('manager');
         }
-        return redirect()->route('manager');
+        return redirect()->route('home');
     }
 
     /**
@@ -76,8 +84,12 @@ class UsersController extends Controller
      */
     public function update(UserPostRequest $request, $id)
     {
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+
         User::find($id)->update($request->except('_token'));
         return redirect()->route('manager');
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -88,7 +100,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+
         User::destroy($id);
         return redirect()->route('manager');
+        }
+        return redirect()->route('home');
     }
 }

@@ -20,14 +20,15 @@ class PowerPolicy
 
 
     public function show(User $user){
-        return $user->super_user === 'Y' || $user->super_user === 'N';
+        return $user->super_user === 'manager' || $user->super_user === 'member';
     }
 
-    public function useAllBtn(User $user){
-        return $user->super_user === 'Y';
+
+    public function member(User $user){
+        return $user->super_user === 'member';
     }
 
-    public function useManager(User $user){
-        return $user->super_user === 'Y';
-    }
+    // public function manager(User $user){
+    //     return $user->super_user === 'Y';
+    // }
 }
