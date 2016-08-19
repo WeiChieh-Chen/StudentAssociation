@@ -85,9 +85,8 @@ class UsersController extends Controller
     public function update(UserPostRequest $request, $id)
     {
         if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
-
-        User::find($id)->update($request->except('_token'));
-        return redirect()->route('manager');
+            User::find($id)->update($request->except('_token'));
+            return redirect()->route('manager');
         }
         return redirect()->route('home');
     }
@@ -101,9 +100,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
-
-        User::destroy($id);
-        return redirect()->route('manager');
+            User::destroy($id);
+            return redirect()->route('manager');
         }
         return redirect()->route('home');
     }

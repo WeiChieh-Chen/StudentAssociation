@@ -3,12 +3,12 @@
 @section('pagename','人員管理')
 @section('content')
 <script language="javascript">
-    var number = 0;
+
     function getForm(arrIndex,trueID){
-        var item = $('#item_'+arrIndex);
-        $('#EditName').val(item.children().html());
-        $('#EditPhone').val(item.children().next().html());
-        $('#EditRight').val((item.children().next().next().html().match('管理者')) ? 'manager':'member');
+        var firstTd = $('#item_'+arrIndex).children();
+        $('#EditEmail').val(firstTd.children().val());
+        $('#EditPhone').val(firstTd.next().html());
+        $('#EditRight').val((firstTd.next().next().html().match('管理者')) ? 'manager':'member');
         $('#index').attr('action','{{route('manager.update')}}/'+trueID);
     }
 
@@ -28,23 +28,11 @@
     @foreach($results as $key => $item)  
     @if(!empty($item->super_user))
          <tr class="tableContent" id="item_{{$key}}">
-        <td>
-            @if(empty($item->name))
-            {{$item->email."<未曾登入本系統>"}}
-            @else
-            {{$item->name}}
-            @endif
-        </td>
+        <td>@if(empty($item->name)){{$item->email."<未曾登入本系統>"}}@else{{$item->name}}@endif<input type="hidden" value="{{$item->email}}"/></td>
         <td>{{$item->phone}}</td>
+        <td>@if(str_contains($item->super_user, 'manager'))管理者@else 成員@endif</td>
         <td>
-            @if(str_contains($item->super_user, 'manager'))
-                管理者
-            @else
-                成員
-            @endif
-        </td>
-        <td>
-             <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
+            <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
             <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
         </td>
     </tr>
@@ -58,9 +46,9 @@
     {!!Form::open([ 'class'=>'form-horizontal', 'method' => 'post', 'route' => 'manager.store'])!!}
         <div class="modal-body">
                 <div class="form-group">
-                    {!!Form::label('MemberAccount','電子信箱',['class' => 'col-sm-2 control-label'])!!}
+                    {!!Form::label('MemberAccount','校務信箱',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::text('email',null,['class' => 'form-control', 'id' => 'MemberAccount', 'placeholder' => '虎科大信箱'])!!}
+                        {!!Form::text('email',"@gm.nfu.edu.tw",['class' => 'form-control', 'id' => 'MemberAccount', 'placeholder' => '虎科大信箱'])!!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -86,21 +74,21 @@
     {!!Form::open(['class'=>'form-horizontal', 'id' => 'index' ,'method' => 'patch'])!!}
         <div class="modal-body">
                  <div class="form-group">
-                    {!!Form::label('EditName','人員姓名',['class' => 'col-sm-2 control-label'])!!}
+                    {!!Form::label('EditEmail','校務信箱',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::text('name',null,['class' => 'form-control', 'id' => 'EditName', 'placeholder' => '姓名'])!!}
+                        {!!Form::text('email',null,['class' => 'form-control', 'id' => 'EditEmail', 'placeholder' => '虎科大信箱'])!!}
                     </div>  
                 </div>
                 <div class="form-group">
                     {!!Form::label('EditPhone','聯絡電話',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::text('phone',null,['class' => 'form-control', 'id' => 'EditPhone', 'placeholder' => '手機'])!!}
+                        {!!Form::text('phone',null,['class' => 'form-control', 'id' => 'EditPhone', 'placeholder' => '填手機，請確認是10碼'])!!}
                     </div>
                 </div>   
                 <div class="form-group">
                     {!!Form::label('EditRight','權限',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::select('super_user',['N' => '成員' , 'Y' => '管理者'],null,['id' => 'EditRight'])!!}
+                        {!!Form::select('super_user',['member' => '成員' , 'manager' => '管理者'],null,['id' => 'EditRight'])!!}
                     </div>
                 </div>         
         </div>
