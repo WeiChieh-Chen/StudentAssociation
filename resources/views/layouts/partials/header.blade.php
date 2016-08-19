@@ -11,7 +11,7 @@
     <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet"/>
     
     <!-- bootstrap theme -->
-    <link href="{{URL::asset('css/bootstrap-theme.css')}}" rel="stylesheet"/>
+    {{-- <link href="{{URL::asset('css/bootstrap-theme.css')}}" rel="stylesheet"/> --}}
 
     <!-- font icon -->
     <link href="{{URL::asset('css/elegant-icons-style.css')}}" rel="stylesheet" />
