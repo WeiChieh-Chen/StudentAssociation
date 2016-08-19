@@ -3,12 +3,12 @@
 @section('pagename','人員管理')
 @section('content')
 <script language="javascript">
-    var number = 0;
+
     function getForm(arrIndex,trueID){
-        var item = $('#item_'+arrIndex);
-        $('#EditEmail').val(item.children().children().val());
-        $('#EditPhone').val(item.children().next().html());
-        $('#EditRight').val((item.children().next().next().html().match('管理者')) ? 'manager':'member');
+        var firstTd = $('#item_'+arrIndex).children();
+        $('#EditEmail').val(firstTd.children().val());
+        $('#EditPhone').val(firstTd.next().html());
+        $('#EditRight').val((firstTd.next().next().html().match('管理者')) ? 'manager':'member');
         $('#index').attr('action','{{route('manager.update')}}/'+trueID);
     }
 
@@ -28,7 +28,7 @@
     @foreach($results as $key => $item)  
     @if(!empty($item->super_user))
          <tr class="tableContent" id="item_{{$key}}">
-        <td>@if(empty($item->name)){{$item->email."<未曾登入本系統>"}}@else{{$item->name}}@endif<email role="hidden" value="{{$item->email}}"/></td>
+        <td>@if(empty($item->name)){{$item->email."<未曾登入本系統>"}}@else{{$item->name}}@endif<input type="hidden" value="{{$item->email}}"/></td>
         <td>{{$item->phone}}</td>
         <td>@if(str_contains($item->super_user, 'manager'))管理者@else 成員@endif</td>
         <td>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     {!!Form::label('MemberAccount','校務信箱',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::text('email',null,['class' => 'form-control', 'id' => 'MemberAccount', 'placeholder' => '虎科大信箱'])!!}
+                        {!!Form::text('email',"@gm.nfu.edu.tw",['class' => 'form-control', 'id' => 'MemberAccount', 'placeholder' => '虎科大信箱'])!!}
                     </div>
                 </div>
                 <div class="form-group">
