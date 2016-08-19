@@ -34,6 +34,7 @@ class GoogleController extends Controller
     {
         if($user = Socialite::driver('google')->user()){
             if($find_user = User::select()->where('email','=',$user->email)->first()){
+                if(empty($find_user->name)) $find_user->update(['name' => $user->name]);
                 Auth::login($find_user);
             }else if(preg_match("/@gm.nfu.edu.tw/",$user->email)){
                 $add_user = User::create([
@@ -46,7 +47,7 @@ class GoogleController extends Controller
             }
             // Storing user infomation to log
             Log::create([
-                'logInAC' => Auth::user()->email,
+                'logInAC' => Auth::user()->name,
                 'logInTime' => Carbon::now()->setTimezone('Asia/Taipei'),
                 'IP' => $_SERVER['REMOTE_ADDR']
             ]);

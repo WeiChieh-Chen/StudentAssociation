@@ -22,6 +22,7 @@ Route::group(['middleware' =>'auth'],function(){
 
     Route::group(['prefix'=>'vote'],function(){
         Route::get('/',['as' => 'vote', 'uses' => 'TurnoutsController@index']);
+        Route::get('/static/{id?}',['as' => 'vote.static', 'uses' => 'TurnoutsController@show']);
         Route::post('/store',['as' => 'vote.store','uses' => 'TurnoutsController@store']);
         Route::patch('/{id?}',['as' => 'vote.update','uses' => 'TurnoutsController@update']);
         Route::delete('/delete/{id?}',['as' => 'vote.delete','uses' => 'TurnoutsController@destroy']);
@@ -29,17 +30,17 @@ Route::group(['middleware' =>'auth'],function(){
     });
 
     Route::group(['prefix' => 'apply'],function(){
-        Route::get('/',['as' => 'apply',  'uses' => 'EventRegistsController@index']);
-        Route::post('/store',['as' => 'apply.store','uses' => 'EventRegistsController@store']);
-        Route::patch('/{id?}',['as' => 'apply.update','uses' => 'EventRegistsController@update']);
-        Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'EventRegistsController@destroy']);
+        Route::get('/',['as' => 'apply',  'uses' => 'ApplysController@index']);
+        Route::post('/store',['as' => 'apply.store','uses' => 'ApplysController@store']);
+        Route::patch('/{id?}',['as' => 'apply.update','uses' => 'ApplysController@update']);
+        Route::delete('/delete/{id?}',['as' => 'apply.delete','uses' => 'ApplysController@destroy']);
     });
     
     Route::group(['prefix' => 'manager'],function(){    
-        Route::get('/',['as' => 'manager', 'uses' => 'MembersController@index']);
-        Route::post('/store',['as' => 'manager.store','uses' => 'MembersController@store']);
-        Route::patch('/{id?}',['as' => 'manager.update','uses' => 'MembersController@update']);
-        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'MembersController@destroy']); 
+        Route::get('/',['as' => 'manager', 'uses' => 'UsersController@index']);
+        Route::post('/store',['as' => 'manager.store','uses' => 'UsersController@store']);
+        Route::patch('/{id?}',['as' => 'manager.update','uses' => 'UsersController@update']);
+        Route::delete('maager/delete/{id?}',['as' => 'manager.delete','uses' => 'UsersController@destroy']); 
     });
 
     Route::group(['prefix' => 'log'],function(){

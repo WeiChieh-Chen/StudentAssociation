@@ -2,12 +2,25 @@
 @section('title','活動報名')
 @section('pagename','活動報名')
 @section('content')
+<style>
+    .tableStyle > td {
+        width: 20%;
+    }
+    textarea {
+        border: #cff09e 6px double;
+        border-radius: 9px;
+        background:transparent;
+        resize: none;
+    }
+</style>
 <script language="javascript">
     var number = 0;
     function getForm(arrIndex,trueID){
-        $('#EditName').val($('#item_'+arrIndex).children().html());
-        $('#EditStart').val($('#item_'+arrIndex).children().next().html());
-        $('#EditEnd').val($('#item_'+arrIndex).children().next().next().html());
+        var wrapItem = $('#item_'+arrIndex);
+        $('#EditName').val(wrapItem.children().html());
+        $('#EditIntro').val(wrapItem.children().next().html());
+        $('#EditStart').val(wrapItem.children().next().next().html());
+        $('#EditEnd').val(wrapItem.children().next().next().next().html());
         $('#index').attr('action','{{route('apply.update')}}/'+trueID);
     }
         function delIndex(trueID){
@@ -19,15 +32,17 @@
     <table class="tableStyle">
     <tr>    
         <td>活動名稱</td>
+        <td>活動簡介</td>
         <td>報名開始日期</td>
         <td>報名結束日期</td>
         <td></td>
     </tr>
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
-        <td><?=$item->name?></td>
-        <td><?=$item->start_at?></td>
-        <td><?=$item->end_at?></td>
+        <td>{{$item->name}}</td>
+        <td>{{str_limit($item->intro,15)}}</td>
+        <td>{{$item->start_at}}</td>
+        <td>{{$item->end_at}}</td>
         <td>
            <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
             <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
@@ -35,7 +50,7 @@
     </tr>
     @endforeach
     </table>
-    <center><?=$results->render()?></center>
+    <center>{{$results->render()}}</center>
 @endsection
 @section('AddForm')
     {!!Form::open([ 'class'=>'form-horizontal', 'method' => 'post', 'route' => 'apply.store'])!!}
@@ -44,6 +59,12 @@
                     {!!Form::label('AcuivityName','活動名稱',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
                         {!!Form::text('name',null,['class' => 'form-control', 'id' => 'AcuivityName', 'placeholder' => '輸入名稱'])!!}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {!!Form::label('introField','活動簡介',['class' => 'col-sm-2 control-label'])!!}
+                    <div class="col-sm-10">
+                        {!!Form::textarea('intro',null,['class' => 'form-control', 'id' => 'introField', 'placeholder' => '簡單介紹活動'])!!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -72,6 +93,12 @@
                 {!!Form::label('EditName','活動名稱',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
                         {!!Form::text('name',null,['class' => 'form-control' , 'id' => 'EditName', 'placeholder' => '輸入名稱'])!!}
+                    </div>
+                </div>
+                <div class="form-group">
+                {!!Form::label('EditIntro','活動簡介',['class' => 'col-sm-2 control-label'])!!}
+                    <div class="col-sm-10">
+                        {!!Form::textarea('intro',null,['class' => 'form-control' , 'id' => 'EditIntro', 'placeholder' => '簡單介紹活動'])!!}
                     </div>
                 </div>
                 <div class="form-group">
