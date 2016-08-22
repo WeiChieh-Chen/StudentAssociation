@@ -15,7 +15,20 @@
     function delIndex(trueID){
         $('#delIndex').attr('action','{{route('manager.delete')}}/'+trueID);    
     }
+    
 </script>
+ @if(session()->has('errMail'))
+<script language="javascript">
+    alertify.set({
+        'delay' : 2000,
+        'labels': {
+            ok        : "確認"
+        },
+        'buttonFocus' : "ok"
+    });  
+    alertify.alert('{{session('errMail')}}');
+    </script>
+    @endif
 <a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
 
 <table class="tableStyle">
