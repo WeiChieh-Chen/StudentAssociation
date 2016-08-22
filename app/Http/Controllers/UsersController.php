@@ -43,10 +43,11 @@ class UsersController extends Controller
     public function store(UserPostRequest $request)
     {
         if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
-            if($findUser = User::select()->where('email',$request['account'])->first()){
-                User::update($reuqest->except('_token'));
-            }else {
-                User::create($request->except('_token'));
+            if(empty($findUser = User::select()->where('email',$request['email'])->first())){
+             User::create($request->except('_token'));
+            }else
+            {
+                return redirect()->to('manager')->with('errMail','此信箱已存在。');
             }
             return redirect()->route('manager');
         }
