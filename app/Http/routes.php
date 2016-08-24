@@ -45,6 +45,7 @@ Route::group(['middleware' =>'auth'],function(){
 
     Route::group(['prefix' => 'log'],function(){
         Route::get('/',['as' => 'log', 'uses' => 'LogsController@index']);
+        Route::get('login',['as' => 'log.in', 'uses' => 'LogsController@create']);
         Route::post('logout',['as' => 'log.out', 'uses' => 'LogsController@update']);
     });
 

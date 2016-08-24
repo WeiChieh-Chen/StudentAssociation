@@ -6,7 +6,7 @@
     .jumbotron {
         background-color: #cff09e;
         text-align: center;
-        margin-top: 18%;
+        margin-top: 5%;
     }
 </style>
 <body>
