@@ -20,7 +20,6 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return new RedirectResponse(url('/log/login'));
         }
-
         return $next($request);
     }
 }
