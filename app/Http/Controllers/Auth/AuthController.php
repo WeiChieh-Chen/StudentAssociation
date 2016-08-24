@@ -29,6 +29,10 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    protected $redirectPath = '/log/login';
+
+
+    protected $username = 'username';
 
     /**
      * Create a new authentication controller instance.
@@ -49,9 +53,11 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'username' => 'required|max:255',
             'password' => 'required|min:6|confirmed',
+            'mail'     => 'required',
+            'displayName' => 'required',
+            'description' => 'required',
         ]);
     }
 
@@ -61,12 +67,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create()
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'username' => $data['username'],
             'password' => bcrypt($data['password']),
+            'mail'     => 'required',
+            'displayName' => 'required',
+            'description' => 'required',
         ]);
     }
 }

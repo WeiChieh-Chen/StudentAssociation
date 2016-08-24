@@ -32,7 +32,12 @@ class LogsController extends Controller
      */
     public function create()
     {
-        //
+        Log::create([
+            'logInAC' => Auth::user()->name,
+            'logInTime' => Carbon::now()->setTimezone('Asia/Taipei'),
+            'IP' => $_SERVER['REMOTE_ADDR']
+        ]);
+        return redirect()->route('home');
     }
 
     /**
