@@ -37,7 +37,7 @@ class LogsController extends Controller
             'logInTime' => Carbon::now()->setTimezone('Asia/Taipei'),
             'IP' => $_SERVER['REMOTE_ADDR']
         ]);
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message','登入成功!');
     }
 
     /**
