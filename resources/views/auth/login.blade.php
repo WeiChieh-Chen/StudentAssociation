@@ -10,7 +10,7 @@
             <h1>歡迎進入系學會 蜘人血統控制板</h1>
             <div class="col-md-8 col-md-offset-2">
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                        <form class="form-horizontal" id="loginForm" role="form" method="POST" action="{{ url('/login') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -43,34 +43,27 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-sign-in"></i> 登入
-                                    </button>
+                                    <p style="text-align:center">
+                                        <div class="wrap">
+                                            <a role="button" style="cursor: pointer" class="btn-slide2" onclick="document.getElementById('loginForm').submit()">
+                                                <span class="circle2">
+                                                    <i class="fa fa-sign-in"></i>
+                                                </span>
+                                                <span class="title2">登入</span>
+                                                <span class="title-hover2">進入本系統</span>
+                                            </a>
+                                        </div>
+                                    </p>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                
+                            <div class="form-group">            
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            {{-- 
-                <div class="col-md-6 col-md-offset-4">
-                    <p style="text-align:center">
-                        <div class="wrap">
-                            <a type="butt" class="btn-slide2">
-                                //<i class="fa fa-btn fa-sign-in"></i> Google 
-                                <span class="circle2">
-                                    <i class="fa fa-sign-in"></i>
-                                </span>
-                                <span class="title2">登入</span>
-                                <span class="title-hover2">進入本系統</span>
-                            </a>
-                        </div>
-                    </p>
-                </div>
-             --}}
+
             {{-- @if(session()->has('errMail'))
             <script>
                 alertify.set({

@@ -28,7 +28,7 @@ class PowerPolicy
         return $user->super_user === 'member';
     }
 
-    // public function manager(User $user){
-    //     return $user->super_user === 'Y';
-    // }
+    public function manager(User $user){
+        return $user->super_user === 'manager';
+    }
 }
