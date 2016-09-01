@@ -6,7 +6,7 @@
 
     function getForm(arrIndex,trueID){
         var firstTd = $('#item_'+arrIndex).children();
-        $('#EditEmail').val(firstTd.children().val());
+        $('#EditNumber').val(firstTd.html());
         $('#EditPhone').val(firstTd.next().html());
         $('#EditRight').val((firstTd.next().next().html().match('管理者')) ? 'manager':'member');
         $('#index').attr('action','{{route('manager.update')}}/'+trueID);
@@ -17,7 +17,7 @@
     }
     
 </script>
- @if(session()->has('errMail'))
+@if(session()->has('errMail'))
 <script language="javascript">
     alertify.set({
         'delay' : 2000,
@@ -28,7 +28,7 @@
     });  
     alertify.alert('{{session('errMail')}}');
     </script>
-    @endif
+@endif
 <a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
 
 <table class="tableStyle">
@@ -41,7 +41,7 @@
     @foreach($results as $key => $item)  
     @if(!empty($item->super_user))
          <tr class="tableContent" id="item_{{$key}}">
-        <td>@if(empty($item->name)){{$item->email."<未曾登入本系統>"}}@else{{$item->name}}@endif<input type="hidden" value="{{$item->email}}"/></td>
+        <td>@if(empty($item->email)){{$item->username."<未曾登入本系統>"}}@else{{$item->username}}@endif<input type="hidden" value="{{$item->email}}"/></td>
         <td>{{$item->phone}}</td>
         <td>@if(str_contains($item->super_user, 'manager'))管理者@else 成員@endif</td>
         <td>
@@ -59,9 +59,9 @@
     {!!Form::open([ 'class'=>'form-horizontal', 'method' => 'post', 'route' => 'manager.store'])!!}
         <div class="modal-body">
                 <div class="form-group">
-                    {!!Form::label('MemberAccount','校務信箱',['class' => 'col-sm-2 control-label'])!!}
+                    {!!Form::label('MemberSN','學生編號',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::text('email',"@gm.nfu.edu.tw",['class' => 'form-control', 'id' => 'MemberAccount', 'placeholder' => '虎科大信箱'])!!}
+                        {!!Form::text('username',null,['class' => 'form-control', 'id' => 'MemberSN', 'placeholder' => 'EX: 4034xxxx'])!!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -86,10 +86,10 @@
 @section('EditForm')
     {!!Form::open(['class'=>'form-horizontal', 'id' => 'index' ,'method' => 'patch'])!!}
         <div class="modal-body">
-                 <div class="form-group">
-                    {!!Form::label('EditEmail','校務信箱',['class' => 'col-sm-2 control-label'])!!}
+                <div class="form-group">
+                    {!!Form::label('EditNumber','學生編號',['class' => 'col-sm-2 control-label'])!!}
                     <div class="col-sm-10">
-                        {!!Form::text('email',null,['class' => 'form-control', 'id' => 'EditEmail', 'placeholder' => '虎科大信箱'])!!}
+                        {!!Form::text('username',null,['class' => 'form-control', 'id' => 'EditNumber', 'placeholder' => '請輸入學號'])!!}
                     </div>  
                 </div>
                 <div class="form-group">

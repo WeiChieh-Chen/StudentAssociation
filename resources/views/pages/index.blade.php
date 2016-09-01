@@ -19,7 +19,7 @@
   }
 </style>
   @if (session('message'))
-    <script> alert('{{ session('message') }}') </script>
+    <script>  alertify.success('{{ session('message') }}') </script>
   @endif
   <!--main content start-->
   <div class="row">
