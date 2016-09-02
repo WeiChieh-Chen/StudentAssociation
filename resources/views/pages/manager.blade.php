@@ -6,7 +6,7 @@
 
     function getForm(arrIndex,trueID){
         var firstTd = $('#item_'+arrIndex).children();
-        $('#EditNumber').val(firstTd.html());
+        $('#EditNumber').val(firstTd.children().val());
         $('#EditPhone').val(firstTd.next().html());
         $('#EditRight').val((firstTd.next().next().html().match('管理者')) ? 'manager':'member');
         $('#index').attr('action','{{route('manager.update')}}/'+trueID);
@@ -41,7 +41,7 @@
     @foreach($results as $key => $item)  
     @if(!empty($item->super_user))
          <tr class="tableContent" id="item_{{$key}}">
-        <td>@if(empty($item->email)){{$item->username."<未曾登入本系統>"}}@else{{$item->username}}@endif<input type="hidden" value="{{$item->email}}"/></td>
+        <td>@if(empty($item->email)){{$item->username."<未曾登入本系統>"}}@else{{$item->username}}@endif<input type="hidden" value="{{$item->username}}"/></td>
         <td>{{$item->phone}}</td>
         <td>@if(str_contains($item->super_user, 'manager'))管理者@else 成員@endif</td>
         <td>
