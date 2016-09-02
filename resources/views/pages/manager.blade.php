@@ -45,7 +45,7 @@
         <td>{{$item->phone}}</td>
         <td>@if(str_contains($item->super_user, 'manager'))管理者@else 成員@endif</td>
         <td>
-            <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
+            @if(str_contains($item->super_user, 'manager'))@else<a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>@endif
             <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
         </td>
     </tr>

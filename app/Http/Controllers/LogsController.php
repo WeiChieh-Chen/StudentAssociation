@@ -17,7 +17,7 @@ class LogsController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+        if(Gate::allows('show', Auth::user()) && Gate::denies('member',Auth::user())){
             $obtain = Log::orderBy('id','DESC');
             //paginate()會將結果陣列，自動格式成他需要的樣子，而其不為JSON格式陣列，故無法成為物件陣列。get()則為一JSON格式之陣列，故可被JS的物件陣列使用。
             return view('pages.log',['mainTitle' => 'Log資訊','results' => $obtain->paginate(13),'obtainArr' => $obtain->get()]);
