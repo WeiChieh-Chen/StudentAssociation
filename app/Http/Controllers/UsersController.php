@@ -17,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if(Gate::allows('show', Auth::user()) && Auth::user()->cannot('member')){
+        if(Gate::allows('show', Auth::user()) && Gate::denies('member',Auth::user())){
             $obtain = User::orderBy('id','DESC');
             return view('pages.manager',['mainTitle' => '人員管理','results' => $obtain->paginate(11),'obtainArr' => $obtain->get()]);        
         }
@@ -86,6 +86,7 @@ class UsersController extends Controller
     public function update(UserPostRequest $request, $id)
     {
         if(Gate::allows('show', Auth::user()) && Gate::denies('member', Auth::user())){
+
             User::find($id)->update($request->except('_token'));
             return redirect()->route('manager');
         }

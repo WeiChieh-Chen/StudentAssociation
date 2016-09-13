@@ -6,7 +6,7 @@
 
     function getForm(arrIndex,trueID){
         var firstTd = $('#item_'+arrIndex).children();
-        $('#EditNumber').val(firstTd.html());
+        $('#EditNumber').val(firstTd.children().val());
         $('#EditPhone').val(firstTd.next().html());
         $('#EditRight').val((firstTd.next().next().html().match('管理者')) ? 'manager':'member');
         $('#index').attr('action','{{route('manager.update')}}/'+trueID);
@@ -41,11 +41,11 @@
     @foreach($results as $key => $item)  
     @if(!empty($item->super_user))
          <tr class="tableContent" id="item_{{$key}}">
-        <td>@if(empty($item->email)){{$item->username."<未曾登入本系統>"}}@else{{$item->username}}@endif<input type="hidden" value="{{$item->email}}"/></td>
+        <td>@if(empty($item->email)){{$item->username."<未曾登入本系統>"}}@else{{$item->username}}@endif<input type="hidden" value="{{$item->username}}"/></td>
         <td>{{$item->phone}}</td>
         <td>@if(str_contains($item->super_user, 'manager'))管理者@else 成員@endif</td>
         <td>
-            <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
+            @if(str_contains($item->super_user, 'manager') && str_contains($item->username, Auth::user()->username))@else<a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>@endif
             <a role="button" class="button  button-secondary" style="font-size: 20px;" onclick = "getForm({{$key}},{{$item->id}})" data-toggle="modal" data-target="#EditForm">編輯</a>
         </td>
     </tr>
