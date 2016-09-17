@@ -51,4 +51,6 @@
     $(function(){
         $('select.styled').customSelect();
     });
+
+    window.onbeforeunload = "{{route('log.out')}}";
 </script>
