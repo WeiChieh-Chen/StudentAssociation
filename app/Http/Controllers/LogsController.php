@@ -34,7 +34,7 @@ class LogsController extends Controller
     {
         $data = explode('_',Auth::user()->description);
         $identity = '訪客';
-
+        
         if(Gate::allows('manager',Auth::user())) $identity = '管理者';
         else if(Gate::allows('show',Auth::user())) $identity = '成員';
         
@@ -44,7 +44,6 @@ class LogsController extends Controller
             'IP' => $_SERVER['REMOTE_ADDR']
         ]);
     
-
         return redirect()->route('home')->with('message','登入成功! '.$identity);
     }
 
@@ -91,7 +90,7 @@ class LogsController extends Controller
     public function update(Request $request)
     {
         $request['logOutTime'] = Carbon::now()->setTimezone('Asia/Taipei');
-        Log::all()->last()->update($request->except('_token'));
+        Log::all()->last()->update(['logOutTime' => $request->logOutTime]);
         Auth::logout();
         return redirect()->to('/login')->with('logout','已登出本系統!');
     }
@@ -106,4 +105,5 @@ class LogsController extends Controller
     {
         //
     }
+
 }
