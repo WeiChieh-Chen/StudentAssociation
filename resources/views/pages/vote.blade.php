@@ -37,7 +37,7 @@ function insertItem(){
 
 function removeItem(){
     $("#item"+number).remove();
-    if(number > 1) number--;
+    if(number > 0) number--;
 }   
 </script>
 <a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
