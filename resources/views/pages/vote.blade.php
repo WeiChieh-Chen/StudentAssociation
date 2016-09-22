@@ -37,7 +37,7 @@ function insertItem(){
 
 function removeItem(){
     $("#item"+number).remove();
-    if(number > 1) number--;
+    if(number > 0) number--;
 }   
 </script>
 <a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
@@ -55,7 +55,7 @@ function removeItem(){
         <td style="font-size: 13px; text-align: left">
         @foreach($itemCollect as $i => $row)
             @if(($itemCollect[$i]->itemId == $item->id) && !empty($row->fileName))
-                    <a href="{{route('getFile').'/'.$row->fileName}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$row->fileName}}</a> <項目{{$i+1}}><br>                
+                    <項目{{$i+1}}><a href="{{route('getFile').'/'.$row->fileName}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$row->fileName}}</a><br>                
             @endif
         @endforeach
      
