@@ -3,21 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Item;
 
 class Turnout extends Model
 {
     protected $table = 'turnouts';
+
+    public $timestamps = false;
+
     protected $fillable=[
-        'item','votes',
-        'optionName1','fileName1',
-        'optionName2','fileName2',
-        'optionName3','fileName3',
-        'optionName4','fileName4',
-        'optionName5','fileName5',
-        'optionName6','fileName6',
-        'optionName7','fileName7',
-        'optionName8','fileName8',
-        'optionName9','fileName9',
-        'optionName10','fileName10'
-        ];
+        'item'
+    ];
+
+    public function items() {
+    //  return $this->hasOne('Class', 'foreign_key', 'local_key');
+        return $this->hasOne(Item::class,'itemId','id');
+    }
 }

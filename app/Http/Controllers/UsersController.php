@@ -42,7 +42,7 @@ class UsersController extends Controller
      */
     public function store(UserPostRequest $request)
     {
-        if(Gate::allows('show', Auth::user()) &&  Gate::denies('member',Auth::user() )){
+        if(Gate::allows('show', Auth::user()) && Gate::denies('member', Auth::user())){
             if(empty($findUser = User::select()->where('email',$request['email'])->first())){
              User::create($request->except('_token'));
             }else
@@ -85,7 +85,8 @@ class UsersController extends Controller
      */
     public function update(UserPostRequest $request, $id)
     {
-        if(Gate::allows('show', Auth::user()) &&  Gate::denies('member',Auth::user())){
+        if(Gate::allows('show', Auth::user()) && Gate::denies('member', Auth::user())){
+
             User::find($id)->update($request->except('_token'));
             return redirect()->route('manager');
         }
@@ -100,7 +101,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if(Gate::allows('show', Auth::user()) && Gate::denies('member',Auth::user())){
+        if(Gate::allows('show', Auth::user()) && Gate::denies('member', Auth::user())){
             User::destroy($id);
             return redirect()->route('manager');
         }

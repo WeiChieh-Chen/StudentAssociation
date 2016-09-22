@@ -61,12 +61,20 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub" style="text-align: left">
-                    <a href="{{route('vote')}}">總項目</a>
+                    <a href="{{route('vote')}}">
+                    <i class="icon_menu-square_alt2" aria-hidden="true"></i>
+                    <span>總項目</span>    
+                    </a>
                     <?php
                         $obtainArr = DB::table('turnouts')->orderBy('id','DESC')->get();    
                         foreach($obtainArr as $items){
                     ?>
-                        <li><a href="{{route('vote.static').'/'.$items->id}}">{{str_limit($items->item,10)}}</a></li>
+                        <li>
+                            <a href="{{route('vote.static').'/'.$items->id}}">
+                                <i class="icon_piechart" aria-hidden="true"></i>
+                                <span>{{str_limit($items->item,10)}}</span>
+                            </a>
+                        </li>
                     <?php
                         }
                     ?>
@@ -74,7 +82,7 @@
             </li>
             <li>
                 <a class="" href="{{route('apply')}}">
-                    <i class="icon_documents_alt" aria-hidden="true"></i>
+                    <i class="icon_archive_alt" aria-hidden="true"></i>
                     <span>活動報名</span>
                 </a>
             </li>
