@@ -1,15 +1,18 @@
-@extends('layouts.master') @section('title','投票區') @section('pagename',$get->item) @section('content')
+@extends('layouts.master')
+@section('title','投票區')
+@section('pagename',$get->item)
+@section('content')
 <?php
-
     $getItems = array();
     $getVotes = array();
 
-    foreach(range(1,10) as $i){
-        if(!empty($get['optionName'.$i])){
-            $getItems[] = $get['optionName'.$i];
-            $getVotes[] = $get['vote'.$i];
+    foreach($datus as $get){
+        if(!empty($get['optionName'])){
+            $getItems[] = $get['optionName'];
+            $getVotes[] = $get['votes'];
         }
     }
+
 ?>
     <canvas id="chart"></canvas>
     <script>
@@ -53,15 +56,18 @@
                 callbacks: {
                     label: function(tooltipItem, data) {
                         var dataset = data.datasets[tooltipItem.datasetIndex];
+                        
                         var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
                             return previousValue + currentValue;
                         });
                         var currentValue = dataset.data[tooltipItem.index];
-                        var precentage = Math.floor(((currentValue/total) * 100)+0.5);     
-                    return precentage + "%, 共得 "+currentValue+" 票";
+                        var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+                        var itemName = data.labels[tooltipItem.index];
+                    return itemName+' : '+precentage + "%, 共得 "+currentValue+" 票";
                     }
                 }
             }
         }
     });
-</script> @endsection
+</script>
+@endsection

@@ -5,35 +5,39 @@
 <script language="javascript">
 var number = 0;
 var datus = new Object();
-var optionNumber = 10;
+var itemDatus = new Object();
 datus = <?=$obtainArr?>;
+itemDatus = <?=$itemCollect?>;
 
 function getForm(arrIndex, trueId){
     $('#EdItems').val($('#item_'+arrIndex).children().html());
     $('#index').attr('action','{{route('vote.update')}}/'+trueId);
-    for(var i = 1 ; i <= optionNumber ; i++){
-        if(datus[arrIndex]['optionName'+i]){
-            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+i+"' class='col-sm-2 control-label'>項目 "+i+"</label><div class='col-sm-10'><input type='text' id='optionName"+i+"' class='form-control' name ='optionName"+i+"' value ="+datus[arrIndex]['optionName'+i]+"></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+i+"'></div></div>");
-        }else return;
-    }
+
+    itemDatus .forEach(function(item, key, array){
+        if(item['itemId'] == trueId){
+            key = item['itemOrder'];
+            $("#optionEditForm").append("<div class='form-group'><label for='optionName"+key+"' class='col-sm-2 control-label'>項目 "+key+"</label><div class='col-sm-10'><input type='text' id='optionName"+key+"' class='form-control' name ='optionName"+key+"' value ="+item['optionName']+"></input><input type='file' name='fileName"+key+"'></div></div>");
+        }
+    });
+
 }
 
 function delIndex(trueID){
     $('#delIndex').attr('action','{{route('vote.delete')}}/'+trueID);
 }
 
+function subForm() {
+    $('#addForm').attr('action','{{route('vote.store')}}/'+number).submit();
+}
+
 function insertItem(){
-    if(number < 10){
-        number++;
-        $("#optionAddForm").append("<div class='form-horizontal' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+number+"'></div></div>");
-    }
+    number++;
+    $("#optionAddForm").append("<div class='form-horizontal' id='item"+number+"'><label for='optionName"+number+"' class='col-sm-2 control-label'>項目 "+number+"</label><div class='col-sm-10'><input type='text' id='optionName"+number+"' class='form-control' name ='optionName"+number+"' placeholder = '項目名稱請慎寫，萬一打錯可是很麻煩的~'></input></div><div class='col-sm-10 col-sm-offset-2'><input type='file' name='fileName"+number+"'></div></div>");
 }   
 
 function removeItem(){
-    if(number > 0){
-        $("#item"+number).remove(); 
-        number--;
-    }
+    $("#item"+number).remove();
+    if(number > 1) number--;
 }   
 </script>
 <a role="button" class="button button-thirdary" style="position: relative;font-size: 20px;left: 87%" data-toggle="modal" data-target="#AddForm">新增</a>
@@ -46,15 +50,15 @@ function removeItem(){
     </tr>
     @foreach($results as $key => $item)
     <tr class="tableContent" id= "item_{{$key}}">
-
         <td >{{$item->item}}</td>
-        <td >{{$item->votes}}</td>
-        <td style="font-size: 13px; text-align: left">          
-            @for($i = 1; $i <= 10 ; $i++)
-                @if(!empty($item['fileName'.$i]))
-                    <a href="{{route('getFile').'/'.$item['fileName'.$i]}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$item['fileName'.$i]}}</a> <項目{{$i}}><br>                
-                @endif
-            @endfor       
+        <td >{{is_null($votes[$item->id])?0:$votes[$item->id]}}</td>
+        <td style="font-size: 13px; text-align: left">
+        @foreach($itemCollect as $i => $row)
+            @if(($itemCollect[$i]->itemId == $item->id) && !empty($row->fileName))
+                    <a href="{{route('getFile').'/'.$row->fileName}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$row->fileName}}</a> <項目{{$i+1}}><br>                
+            @endif
+        @endforeach
+     
         </td>
         <td>
             <a role="button" class="button" style="font-size: 20px;" onclick = "delIndex({{$item->id}})" data-toggle="modal" data-target="#DelForm">刪除</a>
@@ -66,7 +70,7 @@ function removeItem(){
 <center><?=$results->render()?></center>
 @endsection
 @section('AddForm')
-    {!!Form::open(['class' => 'form-horizontal', 'role' => 'form' ,'method' => 'post' , 'route' => 'vote.store','files' => 'true'])!!}  {{--html is  enctype='multipart/form-data'--}}
+    {!!Form::open(['class' => 'form-horizontal', 'id' => 'addForm' ,'method' => 'post' , 'route' => 'vote.store','files' => 'true'])!!}  {{--html is  enctype='multipart/form-data'--}}
         <div class="modal-body">
                 <div class="form-group">
                     {!!Form::label('AddItems','投票名稱',['class' => 'col-sm-2 control-label'])!!}
@@ -84,7 +88,7 @@ function removeItem(){
         </div>
         <div class="modal-footer">
             {!!Form::button('關閉',['class' => 'btn btn-default', 'onclick' => '$("#optionAddForm").empty();$("#AddItems").val("");number=0' ,'data-dismiss' => 'modal'])!!}
-            {!!Form::submit('儲存',['class' => 'btn btn-primary'])!!}
+            {!!Form::button('儲存',['class' => 'btn btn-primary', 'onclick' => 'subForm()'])!!}
         </div>
     {!!Form::close()!!}
 @endsection
@@ -97,8 +101,8 @@ function removeItem(){
                         {!!Form::text('item',null,['class' => 'form-control', 'id' => 'EdItems'])!!}
                     </div>
                 </div>        
+                <div id="optionEditForm"></div>
         </div>
-        <div id="optionEditForm"></div>
         <div class="modal-footer">
             {!!Form::button('取消',['class' => 'btn btn-default', 'onclick' => '$("#optionEditForm").empty()' ,'data-dismiss' =>'modal'])!!}
             {!!Form::submit('更新',['class' => 'btn btn-primary'])!!}

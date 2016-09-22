@@ -15,12 +15,6 @@ class CreateVotesTable extends Migration
         Schema::create('turnouts', function (Blueprint $table) {
             $table->increments('id');
             $table->char('item',50);
-            $table->integer('votes');
-            for($i = 0 ; $i < 10; $i++){
-                $table->char('optionName'.($i+1),50);
-                $table->char('fileName'.($i+1),50);
-            }
-            $table->timestamps();
         });
     }
 
