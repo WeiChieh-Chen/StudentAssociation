@@ -55,7 +55,7 @@ function removeItem(){
         <td style="font-size: 13px; text-align: left">
         @foreach($itemCollect as $i => $row)
             @if(($itemCollect[$i]->itemId == $item->id) && !empty($row->fileName))
-                    <a href="{{route('getFile').'/'.$row->fileName}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$row->fileName}}</a> <項目{{$i+1}}><br>                
+                    <項目{{$i+1}}><a href="{{route('getFile').'/'.$row->fileName}}" ><i class="fa fa-download" aria-hidden="true"></i> {{$row->fileName}}</a><br>                
             @endif
         @endforeach
      
