@@ -68,23 +68,30 @@ class TurnoutsController extends Controller
         if(Gate::denies('show', Auth::user())){
             return redirect()->route('home'); 
         }
-        
-        $newItem = Turnout::create(['item' => $request->item]);
-      
+
+        $newVote = Turnout::create(['item' => $request->item]);
+
         $number = intval($number);
+
         for($i = 1; $i <= $number; $i++) {
             if ($request->hasFile('fileName'.$i)) {                                     //有沒有這個檔案
                 $file = $request->file('fileName'.$i);                                  //取得檔案
                 $original_name = $file->getClientOriginalName();                        //Laravel會儲存檔案仍在暫存區時的名字，所以之後要把他更新成正確檔名。                                                          
                 if($file->isValid()) {                                                  //檔案是否有效 
-                    $file->move(storage_path('app/Filebase/'), $original_name);         //移動檔案     
+                    $file->move(storage_path('app/Filebase/'), $original_name);         //移動檔案
                     Item::create([
-                        'itemId' => $newItem->id,
+                        'itemId' => $newVote->id,
                         'itemOrder' => $i,
                         'optionName' => $request['optionName'.$i],
                         'fileName' => $original_name
                     ]);
                 }
+            }else {
+                Item::create([
+                        'itemId' => $newVote->id,
+                        'itemOrder' => $i,
+                        'optionName' => $request['optionName'.$i],
+                ]);
             }
         }
         return redirect()->route('vote');
